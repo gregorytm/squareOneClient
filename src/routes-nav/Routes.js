@@ -2,15 +2,14 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import ProjectList from "../projects/ProjectList";
 import LoginForm from "../auth/LoginForm";
-import SingupForm from "../auth/SingupForm";
+import SignupForm from "../auth/SignupForm";
 
-/** Project detail page
+/** Site-wide routes
  *
- * Renders informatin about Project
+ * Parts of the site should only be visiable when logged in  Those routes are wrapped by
+ * <PrivateRoute>, which is an authorizaion component
  *
- * Routed at /project/:handle
- *
- * Routes -> ProjectDetail => ChamberCardList
+ * visiting non-existant route redirects to the homepage
  */
 
 function Routes({ login, signup }) {
@@ -22,7 +21,7 @@ function Routes({ login, signup }) {
         </Route>
 
         <Route exact path="/signup">
-          <SingupForm signup={signup} />
+          <SignupForm signup={signup} />
         </Route>
 
         <Route exact path="/projects">

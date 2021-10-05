@@ -7,13 +7,13 @@ import Alert from "../common/Alert";
  * Shows form and manages update to state on changes.
  * On submission:
  * - calls signup fnctin prop
- * - redirects to /companies route
+ * - redirects to /projects route
  *
- * Routes -> Singup Form -> Alertr
+ * Routes -> Singup Form -> Alert
  * Routed as /signup
  */
 
-function SingupForm({ signup }) {
+function SignupForm({ signup }) {
   const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
@@ -23,26 +23,18 @@ function SingupForm({ signup }) {
   });
   const [formErrors, setFormErrors] = useState([]);
 
-  console.debug(
-    "SignupForm",
-    "signup=",
-    typeof signup,
-    "formData=",
-    formData,
-    "formErrors=",
-    formErrors
-  );
-
   /** Handle form submit:
    *
-   * Calls login func prop and, if successful, redirect to /companies.
+   * Calls login func prop and, if successful, redirect to /projects.
    */
 
   async function handleSubmit(evt) {
+    console.log(formData);
     evt.preventDefault();
     let result = await signup(formData);
+    console.log(result);
     if (result.success) {
-      history.push("/companies");
+      history.push("/projects");
     } else {
       setFormErrors(result.errors);
     }
@@ -119,4 +111,4 @@ function SingupForm({ signup }) {
   );
 }
 
-export default SingupForm;
+export default SignupForm;
