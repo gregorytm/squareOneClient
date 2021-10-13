@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import ProjectList from "../projects/ProjectList";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
+import PrivateRoute from "./PrivateRoute";
 
 /** Site-wide routes
  *
@@ -24,9 +25,9 @@ function Routes({ login, signup }) {
           <SignupForm signup={signup} />
         </Route>
 
-        <Route exact path="/projects">
+        <PrivateRoute exact path="/projects">
           <ProjectList />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </div>
   );

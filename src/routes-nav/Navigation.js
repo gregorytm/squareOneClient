@@ -2,12 +2,17 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
 
-/** Navigation bar for site. d
+/** Navigation bar for site. Shows up on every page.
  *
+ * When user is logged in, shows links to main areas of site. When not,
+ * shows link to Login and Signup Forms
+ *
+ * Rendered by App
  */
 
 function Navigation({ logout }) {
   const { currentUser } = useContext(UserContext);
+  console.log("2", currentUser);
 
   function loggedInNav() {
     return (
@@ -17,19 +22,9 @@ function Navigation({ logout }) {
             Projects
           </NavLink>
         </li>
-        {/* <li className="nav-item mr-4">
-          <Navlink className="nav-link" to="/projects/reports">
-            Projecet Reports
-          </Navlink>
-        </li> */}
-        {/* <li className="nav-item mr-4">
-          <Navlink className="nav-link" to="/employees">
-            Employees
-          </Navlink>
-        </li> */}
         <li className="nav-item">
           <Link className="nav-link" to="/" onClick={logout}>
-            Log out{currentUser.first_inital || currentUser.username}
+            Log out{currentUser.first_name || currentUser.username}
           </Link>
         </li>
       </ul>

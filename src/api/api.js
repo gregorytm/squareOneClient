@@ -40,7 +40,7 @@ class SquareOneApi {
   /**Get project (filtered by address if not undefined) */
 
   static async getProjects(address) {
-    let res = await this.requrest("projects", { address });
+    let res = await this.request("projects", { address });
     return res.projects;
   }
 

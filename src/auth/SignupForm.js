@@ -29,9 +29,17 @@ function SignupForm({ signup }) {
    */
 
   async function handleSubmit(evt) {
-    console.log(formData);
+    const {
+      username,
+      password,
+      firstInital: first_inital,
+      lastName: last_name,
+    } = formData;
+    const formSafe = { username, password, first_inital, last_name };
+    console.log(formSafe);
+
     evt.preventDefault();
-    let result = await signup(formData);
+    let result = await signup(formSafe);
     console.log(result);
     if (result.success) {
       history.push("/projects");
