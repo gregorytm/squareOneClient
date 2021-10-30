@@ -36,11 +36,9 @@ function SignupForm({ signup }) {
       lastName: last_name,
     } = formData;
     const formSafe = { username, password, first_inital, last_name };
-    console.log(formSafe);
 
     evt.preventDefault();
     let result = await signup(formSafe);
-    console.log(result);
     if (result.success) {
       history.push("/projects");
     } else {

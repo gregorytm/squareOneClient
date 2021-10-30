@@ -34,13 +34,13 @@ class SquareOneApi {
 
   static async getCurrentUser(username) {
     let res = await this.request(`employee/${username}`);
-    return res.user;
+    return res.employee;
   }
 
-  /**Get project (filtered by address if not undefined) */
+  /**Get project (filtered by actove if not undefined) */
 
-  static async getProjects(address) {
-    let res = await this.request("projects", { address });
+  static async getProjects(active) {
+    let res = await this.request("projects", { active });
     return res.projects;
   }
 

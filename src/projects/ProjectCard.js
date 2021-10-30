@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
  * CompanyList -> CompanyCard
  */
 
-function ProjectCard({ id, address, insuredName, created_at, active }) {
+function ProjectCard({ id, address, insuredName, createdAt, active }) {
   return (
     <Link className="ProjectCard card" to={`/companies/${id}`}>
       <div className="card-body">
@@ -18,7 +18,7 @@ function ProjectCard({ id, address, insuredName, created_at, active }) {
         </h6>
         <p>
           <small>
-            {created_at} {active}
+            {createdAt} {active}
           </small>
         </p>
       </div>

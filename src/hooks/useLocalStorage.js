@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
  * this create item as state and looks in localStorage for current value
  * if none are found, defaults to `firstValue`)
  *
- * when item changes, function re runs;
+ * when item changes, effect re runs;
  * if new state is null removes from localStorage
  * else updates localStorage
  */
@@ -16,7 +16,7 @@ function useLocalStorage(key, firstValue = null) {
   const [item, setItem] = useState(initalValue);
 
   useEffect(
-    function setKeyInLocalStoragew() {
+    function setKeyInLocalStorage() {
       if (item === null) {
         localStorage.removeItem(key);
       } else {

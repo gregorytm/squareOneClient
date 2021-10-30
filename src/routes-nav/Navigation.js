@@ -12,19 +12,23 @@ import UserContext from "../auth/UserContext";
 
 function Navigation({ logout }) {
   const { currentUser } = useContext(UserContext);
-  console.log("2", currentUser);
 
   function loggedInNav() {
     return (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item mr-4">
-          <NavLink className="nav-link" to="/projects">
+          <NavLink className="nav-link" to="/projects/active">
             Projects
+          </NavLink>
+        </li>
+        <li className="nav-item mr-4">
+          <NavLink className="nav-item mr-4" to="/profile">
+            Profile
           </NavLink>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/" onClick={logout}>
-            Log out{currentUser.first_name || currentUser.username}
+            Log out {currentUser.first_name || currentUser.username}
           </Link>
         </li>
       </ul>

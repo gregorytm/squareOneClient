@@ -8,7 +8,7 @@ import SquareOneApi from "./api/api";
 import UserContext from "./auth/UserContext";
 import jwt from "jsonwebtoken";
 
-//export name for storing toekn in localStorage for re-login
+//Key name for storing toekn in localStorage for re-login
 export const TOKEN_STORAGE_ID = "squareOne-token";
 
 /**
