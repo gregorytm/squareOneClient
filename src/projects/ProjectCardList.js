@@ -12,6 +12,7 @@ function ProjectCardList({ projects }) {
     <div className="ProjectCardList">
       {projects.map((project) => (
         <ProjectCard
+          key={project.id}
           id={project.id}
           ensuredName={project.ensuredName}
           address={project.address}

@@ -41,6 +41,9 @@ class SquareOneApi {
 
   static async getProjects(active) {
     let res = await this.request("projects", { active });
+    res.projects.forEach((project) => {
+      project.createdAt = new Date(project.createdAt);
+    });
     return res.projects;
   }
 
@@ -48,14 +51,16 @@ class SquareOneApi {
 
   static async getProject(id) {
     let res = await this.request(`projects/${id}`);
+    res.project.createdAt = new Date(res.project.createdAt);
     return res.project;
   }
 
-  /** Get list of chambers (filtered by chamber_name if not undefined) */
+  /** Get list of chambers */
 
-  static async getChambers(chamberName) {
-    let res = await this.reooquest("chambers", { chamberName });
-    return res.jobs;
+  static async getChambers(projectId) {
+    let res = await this.request("chambers", { projectId });
+    console.log("res", res);
+    return res.chambers;
   }
 
   /** Get token for login from username, password */

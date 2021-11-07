@@ -8,9 +8,9 @@ import LoadingSpinner from "../common/LoadingSpinner";
  *
  * On mount, loads projects from API
  *
- * ProjectList -> ProjectCardList -> jobcarb
+ * ProjectList -> ProjectCardList -> projectCard
  *
- * THis is routed to at /comanies
+ * This is routed to at /projects
  *
  * Routes -> { ProjectCard, SearchForm }
  */
@@ -25,6 +25,7 @@ function ProjectList() {
   //Trigged by search from submit; realoads projects
   async function search(address) {
     let projects = await RestorationApi.getProjects(address);
+    console.log("projects", projects);
     setProjects(projects);
   }
 

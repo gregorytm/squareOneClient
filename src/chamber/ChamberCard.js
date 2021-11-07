@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import "./ChamberCard.css";
-import UserContext from "../auth/UserContext";
+import React from "react";
+import { Link } from "react-router-dom";
 
 /** Show limited information about a job
  *
@@ -11,6 +10,16 @@ import UserContext from "../auth/UserContext";
  */
 
 function ChamberCard({ id, chamberName, projectId }) {
-
-
+  return (
+    <Link to={`/chamber/${id}`}>
+      <div>
+        <h6>
+          {chamberName}
+          {projectId}
+        </h6>
+      </div>
+    </Link>
+  );
 }
+
+export default ChamberCard;
