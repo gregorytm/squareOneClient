@@ -23,9 +23,8 @@ function ProjectList() {
   }, []);
 
   //Trigged by search from submit; realoads projects
-  async function search(address) {
-    let projects = await RestorationApi.getProjects(address);
-    console.log("projects", projects);
+  async function search(active) {
+    let projects = await RestorationApi.getProjects(active);
     setProjects(projects);
   }
 

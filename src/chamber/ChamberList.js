@@ -8,23 +8,24 @@ import LoadingSpinner from "../common/LoadingSpinner";
  * On mount, loads chambers from API
  * Re-loads filtered chambers on submit from search form.
  *
- * ChamberList -> ChamberCardList -> JobCard
+ * ChamberList -> ChamberCardList -> ChamberCard
  *
- * THis is routed at /chambers
+ * This is routed at /projects/:projId/chamber/:chamberId
  */
 
-function ChamberList() {
+function ChamberList({ projectId }) {
   const [chambers, setChambers] = useState(null);
-  console.log("chambers");
 
-  useEffect(function getAllChambersOnMount() {
-    search();
-  }, []);
+  useEffect(
+    function getAllChambersOnMount() {
+      search(projectId);
+    },
+    [projectId]
+  );
 
-  async function search(projectId) {
-    let chambers = await SquareOneApi.getChambers(projectId);
+  async function search(projId) {
+    let chambers = await SquareOneApi.getChambers(projId);
     setChambers(chambers);
-    console.log(chambers);
   }
 
   if (!chambers) return <LoadingSpinner />;

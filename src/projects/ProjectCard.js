@@ -17,9 +17,8 @@ function ProjectCard({ id, address, insuredName, createdAt, active }) {
           {insuredName}
         </h6>
         <p>
-          {/* {new Intl.DateTimeFormat().format(created_at)} */}
           <small>
-            {createdAt.getMonth()} {createdAt.getDay()} {createdAt.getYear()}
+            {createdAt.getMonth()} {createdAt.getDay()} {createdAt.getYear()}{" "}
             active status: {active}
           </small>
         </p>

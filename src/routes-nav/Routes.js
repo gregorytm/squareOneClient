@@ -1,7 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import ProjectList from "../projects/ProjectList";
-import ChamberList from "../chamber/ChamberList";
+// import ChamberList from "../chamber/ChamberList";
+import ChamberDetail from "../chamber/ChamberDetail";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
 import ProfileForm from "../profiles/ProfileForm";
@@ -28,16 +29,24 @@ function Routes({ login, signup }) {
           <SignupForm signup={signup} />
         </Route>
 
-        <PrivateRoute exact path="/chambers/:id">
-          <ChamberList />
-        </PrivateRoute>
-
         <PrivateRoute exact path="/projects/active">
           <ProjectList />
         </PrivateRoute>
 
         <PrivateRoute exact path="/projects/:id">
           <ProjectDetail />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:id/chamber/:id">
+          <ChamberDetail />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:id/chamber/:id/material">
+          <ChamberDetail />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/chamber/:id">
+          <ChamberDetail />
         </PrivateRoute>
 
         <PrivateRoute exact path="/profile">

@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 function ChamberCard({ id, chamberName, projectId }) {
   return (
-    <Link to={`/chamber/${id}`}>
+    <Link to={`/projects/${projectId}/chamber/${id}`}>
       <div>
         <h6>
           {chamberName}

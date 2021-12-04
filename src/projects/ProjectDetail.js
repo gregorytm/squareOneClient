@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SquareOneApi from "../api/api";
-import ChamberList from "../chamber/ChamberCardList";
+import ChamberList from "../chamber/ChamberList";
 import LoadingSpinner from "../common/LoadingSpinner";
 
 /** Project Detail Page
@@ -34,13 +34,13 @@ function ProjectDetail() {
 
   return (
     <div className="ProjectDetail col-md-8 offset-md-2">
-      <h4>{project.insuredname}</h4>
+      <h4>{project.insuredName}</h4>
       <p>
         {project.address}, created at {project.createdAt.getDate()}{" "}
         {project.createdAt.getMonth()} {project.createdAt.getYear()}
       </p>
       <div>
-        <ChamberList />;
+        <ChamberList projectId={id} />
       </div>
     </div>
   );

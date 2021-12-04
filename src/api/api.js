@@ -42,7 +42,7 @@ class SquareOneApi {
   static async getProjects(active) {
     let res = await this.request("projects", { active });
     res.projects.forEach((project) => {
-      project.createdAt = new Date(project.createdAt);
+      project.createdAt = new Date(project.created_at);
     });
     return res.projects;
   }
@@ -55,12 +55,37 @@ class SquareOneApi {
     return res.project;
   }
 
-  /** Get list of chambers */
+  /** Get list of chambers related to project*/
 
   static async getChambers(projectId) {
-    let res = await this.request("chambers", { projectId });
-    console.log("res", res);
+    let res = await this.request(`projects/${projectId}/chambers`);
     return res.chambers;
+  }
+
+  /**Get list of affected materials related to cham */
+
+  static async getMaterials(projectId, chamberId) {
+    let res = await this.request(
+      `projects/${projectId}/chamber/${chamberId}/material`
+    );
+    console.log("affected res", res.material);
+    return res.material;
+  }
+
+  /** get list of dehus related to a chamber */
+
+  static async getDehus(projectId, chamberId) {
+    let res = await this.request(`projects/${projectId}/chamber/${chamberId}`);
+    console.log("res", res);
+    return res.dehu;
+  }
+
+  /**get details on a chamber by id  */
+
+  static async getChamber(id) {
+    let res = await this.request(`chamber/${id}`);
+    console.log("res", res);
+    return res.chamber;
   }
 
   /** Get token for login from username, password */
