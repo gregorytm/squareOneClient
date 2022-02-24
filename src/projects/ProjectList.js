@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import SearchForm from "../common/SearchForm";
+// import SearchForm from "../common/SearchForm";
 import RestorationApi from "../api/api";
 import ProjectCardList from "./ProjectCardList";
+import { NavLink } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
 
 /** Show page with list of companies
@@ -32,12 +33,15 @@ function ProjectList() {
 
   return (
     <div className="JobList col-md-8 offset-md-2">
-      <SearchForm searchFor={search} />
+      {/* <SearchForm searchFor={search} /> */}
       {projects.length ? (
         <ProjectCardList projects={projects} />
       ) : (
         <p className="lead">Sorry, no results were found</p>
       )}
+      <NavLink className="" to="/projects/new">
+        <p>New Project</p>
+      </NavLink>
     </div>
   );
 }

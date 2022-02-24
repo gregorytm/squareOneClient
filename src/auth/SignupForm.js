@@ -40,7 +40,7 @@ function SignupForm({ signup }) {
     evt.preventDefault();
     let result = await signup(formSafe);
     if (result.success) {
-      history.push("/projects");
+      history.push("/employee/pending");
     } else {
       setFormErrors(result.errors);
     }

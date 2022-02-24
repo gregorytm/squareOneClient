@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
+import "./Navigation.css";
 
 /** Navigation bar for site. Shows up on every page.
  *
@@ -22,13 +23,18 @@ function Navigation({ logout }) {
           </NavLink>
         </li>
         <li className="nav-item mr-4">
-          <NavLink className="nav-item mr-4" to="/profile">
+          <NavLink className="nav-link" to="/profile">
             Profile
+          </NavLink>
+        </li>
+        <li className="nav-item mr-4">
+          <NavLink className="nav-link" to="/employee/personnel">
+            Employees
           </NavLink>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/" onClick={logout}>
-            Log out {currentUser.first_name || currentUser.username}
+            Log out {currentUser.lastName || currentUser.username}
           </Link>
         </li>
       </ul>

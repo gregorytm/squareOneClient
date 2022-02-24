@@ -9,15 +9,16 @@ import MaterialCard from "./MaterialCard";
  * ChamberDetail - DehuCardList = DehuCard
  */
 
-function MaterialCardList({ materials }) {
-  console.log("!!", materials);
+function MaterialCardList({ materials, projId }) {
   return (
     <div>
       {materials.map((material) => (
         <MaterialCard
           key={material.id}
-          chamberId={material.chamber_id}
-          materialName={material.material_name}
+          id={material.id}
+          chamberId={material.chamberId}
+          materialName={material.materialName}
+          projectId={projId}
         />
       ))}
     </div>

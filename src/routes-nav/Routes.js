@@ -1,13 +1,31 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import ProjectList from "../projects/ProjectList";
-// import ChamberList from "../chamber/ChamberList";
-import ChamberDetail from "../chamber/ChamberDetail";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
+import PrivateRoute from "./PrivateRoute";
+
+import ProjectList from "../projects/ProjectList";
 import ProfileForm from "../profiles/ProfileForm";
 import ProjectDetail from "../projects/ProjectDetail";
-import PrivateRoute from "./PrivateRoute";
+import ProjectForm from "../projects/ProjectForm";
+import ProjectInput from "../projects/ProjectInput";
+import ProjectReports from "../projects/ProjectReports";
+
+import ChamberForm from "../chamber/ChamberForm";
+import ChamberDetail from "../chamber/ChamberDetail";
+import ChamberReading from "../chamber/ChamberReading";
+
+import DehuForm from "../dehu/DehuForm";
+import DehuReading from "../dehu/DehuReading";
+import DehuList from "../dehu/DehuList";
+
+import MaterialReading from "../materials/MaterialReading";
+import MaterialForm from "../materials/MaterialForm";
+import MaterialList from "../materials/MaterialList";
+
+import EmployeeDetail from "../employees/EmployeeDetail";
+import EmployeeList from "../employees/EmployeeList";
+import EmployeeUnactive from "../employees/EmployeeUnactive";
 
 /** Site-wide routes
  *
@@ -33,20 +51,90 @@ function Routes({ login, signup }) {
           <ProjectList />
         </PrivateRoute>
 
-        <PrivateRoute exact path="/projects/:id">
+        <PrivateRoute exact path="/projects/new">
+          <ProjectForm />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:projId">
           <ProjectDetail />
         </PrivateRoute>
 
-        <PrivateRoute exact path="/projects/:id/chamber/:id">
+        <PrivateRoute exact path="/employee/personnel">
+          <EmployeeList />
+        </PrivateRoute>
+
+        <Route exact path="/employee/pending">
+          <EmployeeUnactive />
+        </Route>
+
+        <PrivateRoute exact path="/employee/:empId">
+          <EmployeeDetail />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:projId/input">
+          <ProjectInput />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:projId/reports">
+          <ProjectReports />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/employee/personnel/new">
+          <SignupForm signup={signup} />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:projId/chamber/new">
+          <ChamberForm />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/projects/:projId/chamber/:chamberId">
           <ChamberDetail />
         </PrivateRoute>
 
-        <PrivateRoute exact path="/projects/:id/chamber/:id/material">
-          <ChamberDetail />
+        <PrivateRoute exact path="/projects/:projId/chamber/:chamberId/reading">
+          <ChamberReading />
         </PrivateRoute>
 
-        <PrivateRoute exact path="/chamber/:id">
-          <ChamberDetail />
+        <PrivateRoute
+          exact
+          path="/projects/:projId/chamber/:chamberId/dehu/new"
+        >
+          <DehuForm />
+        </PrivateRoute>
+
+        <PrivateRoute
+          exact
+          path="/projects/:projId/chamber/:chamberId/dehu/list"
+        >
+          <DehuList />
+        </PrivateRoute>
+
+        <PrivateRoute
+          exaact
+          path="/projects/:projId/chamber/:chamberId/dehu/:dehuId/reading"
+        >
+          <DehuReading />
+        </PrivateRoute>
+
+        <PrivateRoute
+          exact
+          path="/projects/:projId/chamber/:chamberId/material/list"
+        >
+          <MaterialList />
+        </PrivateRoute>
+
+        <PrivateRoute
+          exaact
+          path="/projects/:projId/chamber/:chamberId/material/:materialId/reading"
+        >
+          <MaterialReading />
+        </PrivateRoute>
+
+        <PrivateRoute
+          exact
+          path="/projects/:projId/chamber/:chamberId/material/new"
+        >
+          <MaterialForm />
         </PrivateRoute>
 
         <PrivateRoute exact path="/profile">

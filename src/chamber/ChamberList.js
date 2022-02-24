@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SquareOneApi from "../api/api";
 import ChamberCardList from "./ChamberCardList";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { NavLink } from "react-router-dom";
 
 /** Show page with list of chambers
  *
@@ -13,14 +14,14 @@ import LoadingSpinner from "../common/LoadingSpinner";
  * This is routed at /projects/:projId/chamber/:chamberId
  */
 
-function ChamberList({ projectId }) {
+function ChamberList({ projId }) {
   const [chambers, setChambers] = useState(null);
 
   useEffect(
     function getAllChambersOnMount() {
-      search(projectId);
+      search(projId);
     },
-    [projectId]
+    [projId]
   );
 
   async function search(projId) {
@@ -37,6 +38,9 @@ function ChamberList({ projectId }) {
       ) : (
         <p className="">No chambers were found</p>
       )}
+      <NavLink className="" to={`/projects/${projId}/chamber/new`}>
+        <p>New Chamber</p>
+      </NavLink>
     </div>
   );
 }

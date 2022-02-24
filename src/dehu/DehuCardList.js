@@ -8,15 +8,17 @@ import DehuCard from "./DehuCard";
  * ChamberDetial - DehuCardList= DehuCard
  */
 
-function DehuCardList({ dehus }) {
+function DehuCardList({ dehus, projId }) {
   return (
     <div>
       {dehus.map((dehu) => (
         <DehuCard
           key={dehu.id}
-          dehuNumber={dehu.number}
-          chamberId={dehu.chamber_id}
+          id={dehu.id}
+          dehuNumber={dehu.dehuNumber}
+          chamberId={dehu.chamberId}
           location={dehu.location}
+          projectId={projId}
         />
       ))}
     </div>

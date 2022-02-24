@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import SquareOneApi from "../api/api";
 import MaterialCardList from "./MaterialCardList";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { NavLink } from "react-router-dom";
 
 /**Show page with list of affected materials
  *
@@ -14,7 +16,8 @@ import LoadingSpinner from "../common/LoadingSpinner";
  * ROuter -> { AffectedCard}
  */
 
-function MaterialList({ chamberId }) {
+function MaterialList() {
+  const { projId, chamberId } = useParams();
   const [materials, setMaterials] = useState(null);
 
   useEffect(
@@ -26,7 +29,6 @@ function MaterialList({ chamberId }) {
 
   async function search(chamberId) {
     let materials = await SquareOneApi.getMaterials(chamberId);
-    console.log("client materials", materials);
     setMaterials(materials);
   }
 
@@ -35,10 +37,16 @@ function MaterialList({ chamberId }) {
   return (
     <div className="">
       {materials.length ? (
-        <MaterialCardList materials={materials} />
+        <MaterialCardList materials={materials} projId={projId} />
       ) : (
-        <p className="">No material materials found</p>
+        <p className="">No materials found</p>
       )}
+      <NavLink
+        className=""
+        to={`/projects/${projId}/chamber/${chamberId}/material/new`}
+      >
+        <p>New Affected Material</p>
+      </NavLink>
     </div>
   );
 }

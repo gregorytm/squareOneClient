@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import SquareOneApi from "../api/api";
 import DehuCardList from "./DehuCardList";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { NavLink } from "react-router-dom";
 
 /**Show page with list of dehus
  *
@@ -14,7 +16,8 @@ import LoadingSpinner from "../common/LoadingSpinner";
  * Router -> { DehuCard }
  */
 
-function DehuList({ chamberId }) {
+function DehuList() {
+  const { projId, chamberId } = useParams();
   const [dehus, setDehus] = useState(null);
 
   useEffect(
@@ -26,7 +29,6 @@ function DehuList({ chamberId }) {
 
   async function search(chamberId) {
     let dehus = await SquareOneApi.getDehus(chamberId);
-    console.log("client dehus", dehus);
     setDehus(dehus);
   }
 
@@ -35,10 +37,16 @@ function DehuList({ chamberId }) {
   return (
     <div className="">
       {dehus.length ? (
-        <DehuCardList dehus={dehus} />
+        <DehuCardList dehus={dehus} projId={projId} />
       ) : (
         <p className="">No dehus were found</p>
       )}
+      <NavLink
+        className=""
+        to={`/projects/${projId}/chamber/${chamberId}/dehu/new`}
+      >
+        <p>New Dehumidifier</p>
+      </NavLink>
     </div>
   );
 }

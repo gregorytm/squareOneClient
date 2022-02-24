@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -16,7 +17,9 @@ class SquareOneApi {
 
   static async request(endpoint, data = {}, method = "get") {
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${SquareOneApi.token}` };
+    const headers = SquareOneApi.token
+      ? { Authorization: `Bearer ${SquareOneApi.token}` }
+      : {};
     const params = method === "get" ? data : {};
 
     try {
@@ -32,12 +35,16 @@ class SquareOneApi {
 
   //Get the current user.
 
-  static async getCurrentUser(username) {
-    let res = await this.request(`employee/${username}`);
+  static async getCurrentUser() {
+    if (!this.token) {
+      return undefined;
+    }
+    const { userId } = jwt.decode(this.token);
+    let res = await this.request(`employee/${userId}`);
     return res.employee;
   }
 
-  /**Get project (filtered by actove if not undefined) */
+  /**Get project (filtered by active if not undefined) */
 
   static async getProjects(active) {
     let res = await this.request("projects", { active });
@@ -49,10 +56,25 @@ class SquareOneApi {
 
   /** Get details on a project by id */
 
-  static async getProject(id) {
-    let res = await this.request(`projects/${id}`);
+  static async getProject(projId) {
+    let res = await this.request(`projects/${projId}`);
     res.project.createdAt = new Date(res.project.createdAt);
+    console.log("test", res.project);
     return res.project;
+  }
+
+  /** Create project for api */
+
+  static async newProject(data) {
+    let res = await this.request(`projects/new`, data, "post");
+    return res;
+  }
+
+  /** Delete project from the db */
+
+  static async deleteProject(id) {
+    let res = await this.request(`projects/${id}`, {}, "delete");
+    return res;
   }
 
   /** Get list of chambers related to project*/
@@ -62,30 +84,155 @@ class SquareOneApi {
     return res.chambers;
   }
 
-  /**Get list of affected materials related to cham */
-
-  static async getMaterials(projectId, chamberId) {
-    let res = await this.request(
-      `projects/${projectId}/chamber/${chamberId}/material`
-    );
-    console.log("affected res", res.material);
-    return res.material;
-  }
-
-  /** get list of dehus related to a chamber */
-
-  static async getDehus(projectId, chamberId) {
-    let res = await this.request(`projects/${projectId}/chamber/${chamberId}`);
-    console.log("res", res);
-    return res.dehu;
-  }
-
   /**get details on a chamber by id  */
 
   static async getChamber(id) {
     let res = await this.request(`chamber/${id}`);
-    console.log("res", res);
-    return res.chamber;
+    return res.chamber[0];
+  }
+
+  /** Create project for api */
+
+  static async newChamber(data) {
+    let res = await this.request(
+      `projects/${data.project_id}/chamber/new`,
+      data,
+      "post"
+    );
+    return res;
+  }
+
+  /**Get chambers and readings for assoicated project */
+
+  static async chamberReports(projectId) {
+    let res = await this.request(`projects/${projectId}/readings/chamber`);
+    return res.chambers;
+  }
+
+  /** Delete chamber from the db */
+
+  static async deleteChamber(chamberId) {
+    let res = await this.request(`chamber/${chamberId}`, {}, "delete");
+    return res;
+  }
+
+  /** New chamber reading for api */
+
+  static async newChamberReading(data) {
+    let res = await this.request(`chamber/reading/new`, data, "post");
+    return res;
+  }
+
+  /** Get last chamber reading info from DB */
+
+  static async chamberReadingData(chamberId) {
+    let res = await this.request(`chamber/${chamberId}/reading/data`);
+    return res;
+  }
+
+  /**Get list of affected materials related to cham */
+
+  static async getMaterials(chamberId) {
+    let res = await this.request(`material/${chamberId}`);
+    return res.materials;
+  }
+
+  /** Create new affected material related to chamber */
+
+  static async newMaterial(data) {
+    let res = await this.request(`material/new`, data, "post");
+    return res;
+  }
+
+  /** New material reading for DB reading for db */
+
+  static async newMaterialReading(data) {
+    let res = await this.request(`material/reading/new`, data, "post");
+    return res;
+  }
+
+  /**Get materials and readings for assoicated project */
+
+  static async materialReports(projectId) {
+    let res = await this.request(`projects/${projectId}/readings/materials`);
+    return res.materials;
+  }
+
+  /** Get last material reading info from DB */
+
+  static async materialReadingData(chamberId) {
+    let res = await this.request(`material/${chamberId}/reading/data`);
+    return res;
+  }
+
+  /** get list of dehus related to a chamber */
+
+  static async getDehus(chamberId) {
+    let res = await this.request(`dehu/${chamberId}`);
+    return res.dehus;
+  }
+
+  /**Get dehus and readings for assoicated project */
+
+  static async dehuReports(projectId) {
+    let res = await this.request(`projects/${projectId}/readings/dehu`);
+    return res.dehus;
+  }
+
+  /** Create new dehu related to chamber */
+
+  static async newDehu(data) {
+    let res = await this.request(`dehu/new`, data, "post");
+    return res;
+  }
+
+  /** New dehu reading for db */
+
+  static async newDehuReading(data) {
+    let res = await this.request(`dehu/reading/new`, data, "post");
+    return res;
+  }
+
+  /** Get last dehu reading info from DB for reading input */
+
+  static async dehuReadingData(dehuId) {
+    let res = await this.request(`dehu/${dehuId}/reading/data`);
+    return res;
+  }
+
+  /**Get employees for admin */
+
+  static async getEmployees() {
+    let res = await this.request(`employee/personnel`);
+    return res.employees;
+  }
+
+  /**Get data on specific employee */
+
+  static async getEmployee(empId) {
+    let res = await this.request(`employee/${empId}`);
+    return res.employee;
+  }
+
+  /**Promote employee to manager */
+
+  static async promoteToManager(empId) {
+    let res = await this.request(`employee/${empId}/manager`, {}, "patch");
+    return res;
+  }
+
+  /**Promote null to user */
+
+  static async promoteToUser(empId) {
+    let res = await this.request(`employee/${empId}/user`, {}, "patch");
+    return res;
+  }
+
+  /** Delete employee from the db */
+
+  static async deleteEmployee(empId) {
+    let res = await this.request(`employee/${empId}`, {}, "delete");
+    return res;
   }
 
   /** Get token for login from username, password */

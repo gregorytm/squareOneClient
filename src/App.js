@@ -6,7 +6,6 @@ import Routes from "./routes-nav/Routes";
 import LoadingSpinner from "./common/LoadingSpinner";
 import SquareOneApi from "./api/api";
 import UserContext from "./auth/UserContext";
-import jwt from "jsonwebtoken";
 
 //Key name for storing toekn in localStorage for re-login
 export const TOKEN_STORAGE_ID = "squareOne-token";
@@ -37,10 +36,9 @@ function App() {
       async function getCurrentUser() {
         if (token) {
           try {
-            let { username } = jwt.decode(token);
             //put the oken on the Api class so it can use it to call the API/
             SquareOneApi.token = token;
-            let currentUser = await SquareOneApi.getCurrentUser(username);
+            let currentUser = await SquareOneApi.getCurrentUser();
             setCurrentUser(currentUser);
           } catch (err) {
             setCurrentUser(null);

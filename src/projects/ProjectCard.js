@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./ProjectCard.css";
+
 /**Show limited information about a project
  *
  * Is renderd by ProjectList to show a "card" for each comapny
