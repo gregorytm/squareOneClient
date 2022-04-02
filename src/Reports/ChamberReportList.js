@@ -2,29 +2,30 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SquareOneApi from "../api/api";
 import LoadingSpinner from "../common/LoadingSpinner";
-import MaterialCardList from "./MaterialCardList";
+import ChamberCardList from "./ChamberCardList";
 
-/**Project report page for materials
+/** Project Report page for chamber
  *
- * Renders information and readings about affected materials linked to project
+ * Renders information and readings about project.
  *
  *
  */
 
-function MaterialList() {
+function ChamberReportList() {
   const { projId } = useParams();
+
   const [readings, setReadings] = useState(null);
 
   useEffect(
-    function getAllMaterialsOnMount() {
+    function getAllChamberDataOnMount() {
       search(projId);
     },
     [projId]
   );
 
   async function search(projId) {
-    let materialReadings = await SquareOneApi.materialReports(projId);
-    setReadings(materialReadings);
+    let chamberReadings = await SquareOneApi.chamberReports(projId);
+    setReadings(chamberReadings);
   }
 
   if (!readings) return <LoadingSpinner />;
@@ -32,7 +33,7 @@ function MaterialList() {
   return (
     <div className="">
       {readings.length ? (
-        <MaterialCardList readings={readings} />
+        <ChamberCardList readings={readings} />
       ) : (
         <p className="">No readings were found</p>
       )}
@@ -40,4 +41,4 @@ function MaterialList() {
   );
 }
 
-export default MaterialList;
+export default ChamberReportList;

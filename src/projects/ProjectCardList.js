@@ -10,6 +10,7 @@ import ProjectCard from "./ProjectCard";
 function ProjectCardList({ projects }) {
   return (
     <div className="ProjectCardList">
+      <h2 className="text-center">Current Projects</h2>
       {projects.map((project) => (
         <ProjectCard
           key={project.id}

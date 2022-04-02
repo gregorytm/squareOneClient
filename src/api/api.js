@@ -59,7 +59,6 @@ class SquareOneApi {
   static async getProject(projId) {
     let res = await this.request(`projects/${projId}`);
     res.project.createdAt = new Date(res.project.createdAt);
-    console.log("test", res.project);
     return res.project;
   }
 
@@ -235,6 +234,11 @@ class SquareOneApi {
     return res;
   }
 
+  static async unactiveEmployee(empId) {
+    let res = await this.request(`employee/${empId}/unactive`, {}, "patch");
+    return res;
+  }
+
   /** Get token for login from username, password */
 
   static async login(data) {
@@ -251,8 +255,9 @@ class SquareOneApi {
 
   /** save user profile prage. */
 
-  static async saveProfile(username, data) {
-    let res = await this.request(`users/${username}`, data, "patch");
+  static async saveProfile(empId, data) {
+    let res = await this.request(`employee/${empId}/update`, data, "patch");
+    console.log("test", res);
     return res.user;
   }
 }

@@ -30,14 +30,17 @@ function EmployeeList() {
   if (!employees) return <LoadingSpinner />;
 
   return (
-    <div className="">
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
       {employees.length ? (
         <EmployeeCardList employees={employees} />
       ) : (
         <p className="">No employees were found</p>
       )}
-      <NavLink className="" to={`/employee/personnel/new`}>
-        <p>New Employee</p>
+      <NavLink
+        className=" btn btn-primary col-md-6 col-lg-4 offset-md-3 offset-lg-4"
+        to={`/employee/personnel/new`}
+      >
+        New Employee
       </NavLink>
     </div>
   );

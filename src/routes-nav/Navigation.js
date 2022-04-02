@@ -13,6 +13,7 @@ import "./Navigation.css";
 
 function Navigation({ logout }) {
   const { currentUser } = useContext(UserContext);
+  console.log();
 
   function loggedInNav() {
     return (
@@ -33,7 +34,7 @@ function Navigation({ logout }) {
           </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/" onClick={logout}>
+          <Link className="nav-link" to="/login" onClick={logout}>
             Log out {currentUser.lastName || currentUser.username}
           </Link>
         </li>
@@ -51,7 +52,7 @@ function Navigation({ logout }) {
         </li>
         <li className="nav-item mr-4">
           <NavLink className="nav-link" to="/signup">
-            New Employee signup
+            Signup
           </NavLink>
         </li>
       </ul>

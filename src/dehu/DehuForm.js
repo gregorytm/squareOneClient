@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 
@@ -15,13 +15,14 @@ import SquareOneApi from "../api/api";
  */
 
 function DehuForm({ dehu }) {
-  const history = useHistory();
   const { projId, chamberId } = useParams();
   const [formData, setFormData] = useState({
     dehuNumber: "",
     chamberId: chamberId,
     location: "",
   });
+
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** handles form submit:
@@ -40,7 +41,7 @@ function DehuForm({ dehu }) {
     evt.preventDefault();
     let result = await SquareOneApi.newDehu(formSafe);
     if (result) {
-      history.push(
+      navigate(
         `/projects/${projId}/chamber/${chamberId}/dehu/${result.id}/reading`
       );
     } else {

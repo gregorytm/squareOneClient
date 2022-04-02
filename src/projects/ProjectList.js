@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import SearchForm from "../common/SearchForm";
 import RestorationApi from "../api/api";
 import ProjectCardList from "./ProjectCardList";
 import { NavLink } from "react-router-dom";
@@ -32,16 +31,17 @@ function ProjectList() {
   if (!projects) return <LoadingSpinner />;
 
   return (
-    <div className="JobList col-md-8 offset-md-2">
-      {/* <SearchForm searchFor={search} /> */}
-      {projects.length ? (
-        <ProjectCardList projects={projects} />
-      ) : (
-        <p className="lead">Sorry, no results were found</p>
-      )}
-      <NavLink className="" to="/projects/new">
-        <p>New Project</p>
-      </NavLink>
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+      <div className="col-md-8 offset-md-2 text-center">
+        {projects.length ? (
+          <ProjectCardList projects={projects} />
+        ) : (
+          <p className="lead">Sorry, no results were found</p>
+        )}
+        <NavLink className="btn btn-primary btn-block mt-4" to="/projects/new">
+          New Project
+        </NavLink>
+      </div>
     </div>
   );
 }

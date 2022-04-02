@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
 
 /** Login form.
@@ -14,11 +14,11 @@ import Alert from "../common/Alert";
  */
 
 function LoginForm({ login }) {
-  const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** Handle form submit:
@@ -30,7 +30,7 @@ function LoginForm({ login }) {
     evt.preventDefault();
     let result = await login(formData);
     if (result.success) {
-      history.push("./projects");
+      navigate("/projects/active");
     } else {
       setFormErrors(result.errors);
     }

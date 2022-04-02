@@ -17,13 +17,9 @@ function ProjectCard({ id, address, insuredName, createdAt, active }) {
         <h6 className="card-title">
           {address}
           {insuredName}
+          {createdAt.getMonth()}/{createdAt.getDay()}/{createdAt.getYear()}{" "}
+          active status: {active ? "active" : "unactive"}
         </h6>
-        <p>
-          <small>
-            {createdAt.getMonth()} {createdAt.getDay()} {createdAt.getYear()}{" "}
-            active status: {active}
-          </small>
-        </p>
       </div>
     </Link>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 import UserContext from "../auth/UserContext";
@@ -13,10 +14,11 @@ import UserContext from "../auth/UserContext";
  */
 
 function ProfileForm() {
+  let navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: currentUser.username,
-    firstName: currentUser.firstName,
+    firstInital: currentUser.firstInital,
     lastName: currentUser.lastName,
     password: "",
   });
@@ -35,6 +37,7 @@ function ProfileForm() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     let profileData = {
+      username: formData.username,
       firstInital: formData.firstInital,
       lastName: formData.lastName,
       password: formData.password,
@@ -44,9 +47,11 @@ function ProfileForm() {
     let updateEmployee;
 
     try {
-      updateEmployee = await SquareOneApi.saveProfile(username, profileData);
+      updateEmployee = await SquareOneApi.saveProfile(
+        currentUser.id,
+        profileData
+      );
     } catch (errors) {
-      debugger;
       setFormErrors(errors);
       return;
     }
@@ -84,7 +89,7 @@ function ProfileForm() {
               <input
                 name="firstInital"
                 className="form-control"
-                value={formData.firstName}
+                value={formData.firstInital}
                 onChange={handleChange}
               />
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 
@@ -15,12 +15,12 @@ import SquareOneApi from "../api/api";
  */
 
 function ProjectForm({ project }) {
-  const history = useHistory();
   const [formData, setFormData] = useState({
     insuredName: "",
     address: "",
     createdAt: new Date(),
   });
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** Handles form submit:
@@ -39,7 +39,7 @@ function ProjectForm({ project }) {
     evt.preventDefault();
     let result = await SquareOneApi.newProject(formSafe);
     if (result.id) {
-      history.push(`/projects/${result.id}`);
+      navigate(`/projects/${result.id}`);
     } else {
       setFormErrors(result.errors);
     }

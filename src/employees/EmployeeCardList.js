@@ -10,7 +10,8 @@ import EmployeeCard from "./EmployeeCard";
 
 function EmployeeCardList({ employees }) {
   return (
-    <div>
+    <div className="EmployeeCardList">
+      <h2 className="text-center">Employee List</h2>
       {employees.map((employee) => (
         <EmployeeCard
           key={employee.id}

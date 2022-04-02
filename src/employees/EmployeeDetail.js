@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import SquareOneApi from "../api/api";
 import Alert from "../common/Alert";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -13,10 +13,11 @@ import LoadingSpinner from "../common/LoadingSpinner";
  */
 
 function EmployeeDetail() {
-  const history = useHistory();
   const { empId } = useParams();
   const [employee, setEmployee] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
+
+  let navigate = useNavigate();
 
   useEffect(
     function getEmployeeForUser() {
@@ -37,7 +38,7 @@ function EmployeeDetail() {
     evt.preventDefault();
     let result = await SquareOneApi.deleteEmployee(empId);
     if (result.deleted) {
-      history.push(`/employee/personnel`);
+      navigate(`/employee/personnel`);
     } else {
       setFormErrors(result.errors);
     }
@@ -47,7 +48,17 @@ function EmployeeDetail() {
     evt.preventDefault();
     let result = await SquareOneApi.promoteToManager(empId);
     if (result) {
-      history.push(`/employee/personnel`);
+      navigate(`/employee/personnel`);
+    } else {
+      setFormErrors(result.errors);
+    }
+  }
+
+  async function handleUnactive(evt) {
+    evt.preventDefault();
+    let result = await SquareOneApi.unactiveEmployee(empId);
+    if (result) {
+      navigate(`/employee/personnel`);
     } else {
       setFormErrors(result.errors);
     }
@@ -56,8 +67,8 @@ function EmployeeDetail() {
   async function handlePromoteToUser(evt) {
     evt.preventDefault();
     let result = await SquareOneApi.promoteToUser(empId);
-    if (result) {
-      history.push(`/employee/personnel`);
+    if (result.employee) {
+      navigate(`/employee/personnel`);
     } else {
       setFormErrors(result.errors);
     }
@@ -66,20 +77,39 @@ function EmployeeDetail() {
   if (!employee) return <LoadingSpinner />;
 
   return (
-    <div className="">
-      <h4>
-        first inital{employee.firstInital} last name {employee.lastName}
+    <div className="text-center">
+      <h4 className="">
+        first inital {employee.firstInital} last name {employee.lastName}
       </h4>
-      role{employee.role}
-      <button type="submit" onClick={handleDelete}>
-        Delete Employee
-      </button>
-      <button type="submit" onClick={handlePromoteToManager}>
-        Promote to Manager
-      </button>
-      <button type="submit" onClick={handlePromoteToUser}>
+      <h5>role: {employee.role ? employee.role : "unactive"}</h5>
+      <button
+        className="btn btn-success btn-block mt-4"
+        type="submit"
+        onClick={handlePromoteToUser}
+      >
         Activate User
-      </button>
+      </button>{" "}
+      <button
+        className="btn btn-primary btn-block mt-4"
+        type="submit"
+        onClick={handlePromoteToManager}
+      >
+        Promote to Manager
+      </button>{" "}
+      <button
+        className="btn btn-secondary btn-block mt-4"
+        type="submit"
+        onClick={handleUnactive}
+      >
+        Make Unactive
+      </button>{" "}
+      <button
+        className="btn btn-danger btn-block mt-4"
+        type="submit"
+        onClick={handleDelete}
+      >
+        Delete Employee
+      </button>{" "}
       {formErrors.length ? <Alert type="danger" messages={formErrors} /> : null}
     </div>
   );

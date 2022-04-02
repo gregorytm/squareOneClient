@@ -11,7 +11,7 @@ import DehuCardList from "./DehuCardList";
  *
  */
 
-function DehuList() {
+function DehuReportList() {
   const { projId } = useParams();
   const [readings, setReadings] = useState(null);
 
@@ -40,4 +40,4 @@ function DehuList() {
   );
 }
 
-export default DehuList;
+export default DehuReportList;

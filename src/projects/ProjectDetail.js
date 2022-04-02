@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, NavLink, useHistory } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import SquareOneApi from "../api/api";
 import Alert from "../common/Alert";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -16,11 +16,11 @@ import LoadingSpinner from "../common/LoadingSpinner";
  */
 
 function ProjectDetail() {
-  const history = useHistory();
   const { projId } = useParams();
 
   const [project, setProject] = useState(null);
 
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   useEffect(
@@ -37,7 +37,7 @@ function ProjectDetail() {
     evt.preventDefault();
     let result = await SquareOneApi.deleteProject(projId);
     if (result.deleted) {
-      history.push("/projects/active");
+      navigate("/projects/active");
     } else {
       setFormErrors(result.errors);
     }
@@ -46,19 +46,35 @@ function ProjectDetail() {
   if (!project) return <LoadingSpinner />;
 
   return (
-    <div>
-      <h4>{project.insuredAddress}</h4>
-      <h3>{project.insuredName}</h3>
-      <NavLink className="nav-link" to={`/projects/${projId}/input`}>
-        Create Projects and take readings
-      </NavLink>
-      <NavLink className="nav-link" to={`/projects/${projId}/reports`}>
-        Generate project reports
-      </NavLink>
-
-      <button type="submit" onClick={handleDelete}>
-        Delete Project
-      </button>
+    <div className="text-center">
+      <h4 className="text-center">
+        {project.address} - {project.insuredName}
+      </h4>
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <NavLink
+          className="btn btn-primary btn-block mt-4"
+          to={`/projects/${projId}/input`}
+        >
+          Create Projects and take readings
+        </NavLink>
+      </div>
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <NavLink
+          className="btn btn-success btn-block mt-4"
+          to={`/projects/${projId}/reports`}
+        >
+          Generate project reports
+        </NavLink>
+      </div>
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4 deleteBtn">
+        <button
+          className="btn btn-danger btn-block mt-4"
+          type="submit"
+          onClick={handleDelete}
+        >
+          Delete Project
+        </button>
+      </div>
 
       {formErrors.length ? <Alert type="danger" message={formErrors} /> : null}
     </div>
@@ -66,45 +82,3 @@ function ProjectDetail() {
 }
 
 export default ProjectDetail;
-
-// function ProjectDetail() {
-//   const { projId } = useParams();
-
-//   const [project, setProject] = useState(null);
-//   const [listType, setListType] = useState("ProjectInput");
-
-//   useEffect(
-//     function getProjectForUser() {
-//       async function getProject() {
-//         setProject(await SquareOneApi.getProject(projId));
-//       }
-//       getProject();
-//     },
-//     [projId]
-//   );
-
-//   if (!project) return <LoadingSpinner />;
-
-//   let listComponent;
-//   if (listType === "ProjectInput") {
-//     listComponent = <ProjectInput projectId={projId} />;
-//   } else if (listType === "ProjectReports") {
-//     listComponent = <ProjectReports projectId={projId} />;
-//   }
-
-//   return (
-//     <div className="">
-//       <h4>{project.address}</h4>
-//       <h3>{project.insuredName}</h3>
-//       <div onClick={() => setListType("ProjectInput")}>
-//         Create projects and readings
-//       </div>
-//       <div onClick={() => setListType("ProjectReports")}>
-//         Generate Project Reports
-//       </div>
-//       <div>{listComponent ? listComponent : "loading..."}</div>
-//     </div>
-//   );
-// }
-
-// export default ProjectDetail;

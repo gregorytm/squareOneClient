@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 
@@ -15,7 +15,6 @@ import SquareOneApi from "../api/api";
  */
 
 function MaterialForm({ material }) {
-  const history = useHistory();
   const { projId, chamberId } = useParams();
   const [formData, setFormData] = useState({
     chamberId: chamberId,
@@ -35,9 +34,9 @@ function MaterialForm({ material }) {
     evt.preventDefault();
     let result = await SquareOneApi.newMaterial(formSafe);
     if (result) {
-      history.push(
-        `/projects/${projId}/chamber/${chamberId}/material/${result.id}/reading`
-      );
+      <Link
+        to={`/projects/${projId}/chamber/${chamberId}/material/${result.id}/reading`}
+      />;
     } else {
       setFormErrors(result.errors);
     }

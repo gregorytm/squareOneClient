@@ -14,7 +14,7 @@ function PrivateRoute({ exact, path, children }) {
   const { currentUser } = useContext(UserContext);
 
   if (!currentUser) {
-    return <Redirect to="/login" />;
+    <Route to="/login" />;
   }
 
   return (
@@ -25,3 +25,19 @@ function PrivateRoute({ exact, path, children }) {
 }
 
 export default PrivateRoute;
+
+// function PrivateRoute({ exact, path, children }) {
+//   const { currentUser } = useContext(UserContext);
+
+//   if (!currentUser) {
+//     return <Redirect to="/login" />;
+//   }
+
+//   return (
+//     <Route exact={exact} path={path}>
+//       {children}
+//     </Route>
+//   );
+// }
+
+// export default PrivateRoute;

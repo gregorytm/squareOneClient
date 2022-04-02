@@ -38,9 +38,9 @@ function ProjectInput() {
   if (!project) return <LoadingSpinner />;
 
   return (
-    <div>
-      <h4>{project.address}</h4>
-      <h2>{project.insuredName}</h2>
+    <div className="ProjectCardList">
+      <h2 className="text-center">{project.address}</h2>
+      <h4 className="text-center">{project.insuredName}</h4>
       <div>
         <ChamberList projId={projId} />
       </div>

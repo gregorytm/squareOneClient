@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
 
 /**Singup form
@@ -14,13 +14,13 @@ import Alert from "../common/Alert";
  */
 
 function SignupForm({ signup }) {
-  const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     firstInital: "",
     lastName: "",
   });
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** Handle form submit:
@@ -40,7 +40,7 @@ function SignupForm({ signup }) {
     evt.preventDefault();
     let result = await signup(formSafe);
     if (result.success) {
-      history.push("/employee/pending");
+      navigate("/employee/pending");
     } else {
       setFormErrors(result.errors);
     }

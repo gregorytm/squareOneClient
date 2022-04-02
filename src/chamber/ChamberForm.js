@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 
@@ -15,12 +15,12 @@ import SquareOneApi from "../api/api";
  */
 
 function ChamberForm({ chamber }) {
-  const history = useHistory();
   const { projId } = useParams();
   const [formData, setFormData] = useState({
     chamberName: "",
     projectId: projId,
   });
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** handles form submit:
@@ -35,7 +35,7 @@ function ChamberForm({ chamber }) {
     evt.preventDefault();
     let result = await SquareOneApi.newChamber(formSafe);
     if (result.chamber) {
-      history.push(`/projects/${projId}/chamber/${result.chamber.id}`);
+      navigate(`/projects/${projId}/chamber/${result.chamber.id}`);
     } else {
       setFormErrors(result.errors);
     }

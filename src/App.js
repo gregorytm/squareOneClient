@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Navigation from "./routes-nav/Navigation";
-import Routes from "./routes-nav/Routes";
+import AppRoutes from "./routes-nav/AppRoutes";
 import LoadingSpinner from "./common/LoadingSpinner";
 import SquareOneApi from "./api/api";
 import UserContext from "./auth/UserContext";
@@ -102,7 +102,7 @@ function App() {
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className="App">
           <Navigation logout={logout} />
-          <Routes login={login} signup={signup} />
+          <AppRoutes login={login} signup={signup} />
         </div>
       </UserContext.Provider>
     </BrowserRouter>
