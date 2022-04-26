@@ -7,16 +7,14 @@ import React from "react";
  * DehuReadingData = DehuReadingDataCard
  */
 
-function DehuReadingDataCard(data) {
+function DehuDataCard(data) {
   const { reading_date: readingDate, day_number: dayNumber } = data.data;
   return (
     <div className="">
-      <p>
-        the last reading was taken on {new Date(readingDate).toDateString()},
-        day number {dayNumber}
-      </p>
+      the last reading was taken on {new Date(readingDate).toDateString()}, day
+      number {dayNumber}
     </div>
   );
 }
 
-export default DehuReadingDataCard;
+export default DehuDataCard;

@@ -14,7 +14,7 @@ import SquareOneApi from "../api/api";
  * Routed as /projects/new
  */
 
-function ProjectForm({ project }) {
+function ProjectForm() {
   const [formData, setFormData] = useState({
     insuredName: "",
     address: "",
@@ -22,6 +22,16 @@ function ProjectForm({ project }) {
   });
   let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
+
+  async function newProjectApiCall(data) {
+    try {
+      let result = await SquareOneApi.newProject(data);
+      return { susccess: true, result };
+    } catch (errors) {
+      console.error("create new project failed", errors);
+      return { succes: false, errors };
+    }
+  }
 
   /** Handles form submit:
    *
@@ -37,11 +47,12 @@ function ProjectForm({ project }) {
     const formSafe = { insured_name, address, created_at };
 
     evt.preventDefault();
-    let result = await SquareOneApi.newProject(formSafe);
-    if (result.id) {
-      navigate(`/projects/${result.id}`);
+    let project = await newProjectApiCall(formSafe);
+    console.log("project", project);
+    if (project) {
+      navigate(`/projects/${project.result.id}`);
     } else {
-      setFormErrors(result.errors);
+      setFormErrors(project.result.errors);
     }
   }
 
@@ -62,6 +73,7 @@ function ProjectForm({ project }) {
                 <label>Insured Name</label>
                 <input
                   name="insuredName"
+                  required="required"
                   className="form-control"
                   value={formData.insuredName}
                   onChange={handleChange}
@@ -71,6 +83,7 @@ function ProjectForm({ project }) {
                 <label>Address</label>
                 <input
                   type="address"
+                  required="required"
                   name="address"
                   className="form-control"
                   value={formData.address}
@@ -84,7 +97,7 @@ function ProjectForm({ project }) {
 
               <button
                 type="submit"
-                className="btn btn-primary float-right"
+                className="btn btn-primary float-right mt-4"
                 onSubmit={handleSubmit}
               >
                 Submit

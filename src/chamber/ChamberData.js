@@ -24,19 +24,20 @@ function ChamberData({ chamberId }) {
 
   async function search(chamberId) {
     let data = await SquareOneApi.chamberReadingData(chamberId);
-    data = data.chamberData;
     setData(data);
   }
 
   if (!data) return <LoadingSpinner />;
 
   return (
-    <div className="">
-      {data ? (
-        <ChamberDataCard data={data} />
-      ) : (
-        <p className="">No previous entries found for this chamber</p>
-      )}
+    <div className="container-fluid">
+      <div className="text-center">
+        {data && !data === "Invalid Date" ? (
+          <ChamberDataCard data={data} />
+        ) : (
+          <strong className="">No previous entries found for chamber</strong>
+        )}
+      </div>
     </div>
   );
 }

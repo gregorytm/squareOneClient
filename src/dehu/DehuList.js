@@ -19,9 +19,10 @@ import { NavLink } from "react-router-dom";
 function DehuList() {
   const { projId, chamberId } = useParams();
   const [dehus, setDehus] = useState(null);
+  const [chamber, setChamber] = useState(null);
 
   useEffect(
-    function getDehusOnMount() {
+    function getDehusChamberOnMount() {
       search(chamberId);
     },
     [chamberId]
@@ -29,24 +30,39 @@ function DehuList() {
 
   async function search(chamberId) {
     let dehus = await SquareOneApi.getDehus(chamberId);
+    let chamber = await SquareOneApi.getChamber(chamberId);
     setDehus(dehus);
+    setChamber(chamber);
   }
 
-  if (!dehus) return <LoadingSpinner />;
+  // async function handleDelete(evt) {
+  //   evt.preventDefault();
+  //   let result = await SquareOneApi.deleteMaterial(materialId);
+  //   if (result.deleted) {
+  //     navigate(`/projects/${projId}/input`);
+  //   } else {
+  //     setFormErrors(result.errors);
+  //   }
+  // }
+
+  if (!dehus && !chamber) return <LoadingSpinner />;
 
   return (
-    <div className="">
-      {dehus.length ? (
-        <DehuCardList dehus={dehus} projId={projId} />
-      ) : (
-        <p className="">No dehus were found</p>
-      )}
-      <NavLink
-        className=""
-        to={`/projects/${projId}/chamber/${chamberId}/dehu/new`}
-      >
-        <p>New Dehumidifier</p>
-      </NavLink>
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+      <div className="col-md-8 offset-md-2 text-center">
+        {chamber ? <h4>{chamber.chamberName}</h4> : <p>waiting...</p>}
+        {dehus.length ? (
+          <DehuCardList dehus={dehus} projId={projId} />
+        ) : (
+          <p className="">No dehus were found</p>
+        )}
+        <NavLink
+          className="btn btn-primary btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/dehu/new`}
+        >
+          New Dehumidifier
+        </NavLink>
+      </div>
     </div>
   );
 }

@@ -9,7 +9,8 @@ import ChamberCard from "./ChamberCard";
 
 function ChamberCardList({ readings }) {
   return (
-    <div>
+    <div className="ChamberCardList">
+      <h2 className="mb-3">New Reading</h2>
       {readings.map((reading) => (
         <ChamberCard
           key={readings.indexOf(reading)}

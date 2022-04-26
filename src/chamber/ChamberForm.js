@@ -14,7 +14,7 @@ import SquareOneApi from "../api/api";
  * Routed as /chamber/new
  */
 
-function ChamberForm({ chamber }) {
+function ChamberForm() {
   const { projId } = useParams();
   const [formData, setFormData] = useState({
     chamberName: "",
@@ -23,6 +23,16 @@ function ChamberForm({ chamber }) {
   let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
+  async function newChamberApiCall(data) {
+    try {
+      let result = await SquareOneApi.newChamber(data);
+      return { success: true, result };
+    } catch (errors) {
+      console.error("create new chamber failed", errors);
+      return { success: false, errors };
+    }
+  }
+
   /** handles form submit:
    *
    * calls login func prop and, if success redirec to /projects/:projid/chamber/:chamberid
@@ -30,15 +40,19 @@ function ChamberForm({ chamber }) {
 
   async function handleSubmit(evt) {
     const { chamberName: chamber_name, projectId: project_id } = formData;
-    const formSafe = { chamber_name, project_id };
+    const formSafe = { chamber_name, project_id: Number(project_id) };
 
     evt.preventDefault();
-    let result = await SquareOneApi.newChamber(formSafe);
-    if (result.chamber) {
-      navigate(`/projects/${projId}/chamber/${result.chamber.id}`);
+    let chamber = await newChamberApiCall(formSafe);
+    if (chamber.result) {
+      navigate(`/projects/${projId}/chamber/${chamber.result.id}`);
     } else {
-      setFormErrors(result.errors);
+      setFormErrors(chamber.errors);
     }
+  }
+
+  function handleBack() {
+    navigate(`/projects/${projId}`);
   }
 
   /** update formData field */
@@ -58,6 +72,7 @@ function ChamberForm({ chamber }) {
                 <label>Chamber Name</label>
                 <input
                   name="chamberName"
+                  required="required"
                   className="form-control"
                   value={formData.chamberName}
                   onChange={handleChange}
@@ -70,10 +85,17 @@ function ChamberForm({ chamber }) {
 
               <button
                 type="submit"
-                className="btn btn-primary float-right"
+                className="btn btn-primary float-right mt-4"
                 onSubmit={handleSubmit}
               >
                 Submit
+              </button>
+
+              <button
+                className="btn btn-secondary btn-block mt-4"
+                onClick={handleBack}
+              >
+                Back to chamber list
               </button>
             </form>
           </div>

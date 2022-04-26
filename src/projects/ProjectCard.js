@@ -15,10 +15,9 @@ function ProjectCard({ id, address, insuredName, createdAt, active }) {
     <Link className="ProjectCard card" to={`/projects/${id}`}>
       <div className="card-body">
         <h6 className="card-title">
-          {address}
-          {insuredName}
-          {createdAt.getMonth()}/{createdAt.getDay()}/{createdAt.getYear()}{" "}
-          active status: {active ? "active" : "unactive"}
+          {address} Resident: {insuredName} {createdAt.getMonth()}/
+          {createdAt.getDay()}/{createdAt.getYear()} status:{" "}
+          {active ? "active" : "unactive"}
         </h6>
       </div>
     </Link>

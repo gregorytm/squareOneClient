@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 
@@ -14,12 +14,13 @@ import SquareOneApi from "../api/api";
  * Routed as /projects/:id/chamber/:chamberId/dehu/new
  */
 
-function MaterialForm({ material }) {
+function MaterialForm() {
   const { projId, chamberId } = useParams();
   const [formData, setFormData] = useState({
     chamberId: chamberId,
     materialName: "",
   });
+  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** handles form submit:
@@ -27,18 +28,29 @@ function MaterialForm({ material }) {
    * calls login func prop, if success redirect to /projects/:projId
    */
 
+  async function newMaterialApiCall(data) {
+    try {
+      let result = await SquareOneApi.newMaterial(data);
+      return { success: true, result };
+    } catch (errors) {
+      console.error("create new material failed", errors);
+      return { success: false, errors };
+    }
+  }
+
   async function handleSubmit(evt) {
     const { chamberId: chamber_id, materialName: material_name } = formData;
     const formSafe = { chamber_id, material_name };
 
     evt.preventDefault();
-    let result = await SquareOneApi.newMaterial(formSafe);
-    if (result) {
-      <Link
-        to={`/projects/${projId}/chamber/${chamberId}/material/${result.id}/reading`}
-      />;
+    let material = await newMaterialApiCall(formSafe);
+    if (material.success) {
+      console.log("material", material);
+      navigate(
+        `/projects/${projId}/chamber/${chamberId}/material/${material.result.id}/reading`
+      );
     } else {
-      setFormErrors(result.errors);
+      setFormErrors(material.errors);
     }
   }
 
@@ -59,6 +71,7 @@ function MaterialForm({ material }) {
                 <label>Material Name</label>
                 <input
                   name="materialName"
+                  required="required"
                   className="form-control"
                   value={formData.materialName}
                   onChange={handleChange}
@@ -71,7 +84,7 @@ function MaterialForm({ material }) {
 
               <button
                 type="submit"
-                className="btn btn-primary float-right"
+                className="btn btn-primary float-right mt-4"
                 onSubmit={handleSubmit}
               >
                 Submit

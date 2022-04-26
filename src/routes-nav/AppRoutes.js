@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate, Link, Outlet } from "react-router-dom";
-import UserContext from "../auth/UserContext";
+import { useCurrentUser } from "../auth/UserContext";
 
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
@@ -11,7 +11,7 @@ import ProfileForm from "../profiles/ProfileForm";
 import ProjectDetail from "../projects/ProjectDetail";
 import ProjectForm from "../projects/ProjectForm";
 import ProjectInput from "../projects/ProjectInput";
-import ProjectReports from "../projects/ProjectReports";
+import ProjectReports from "../reports/ProjectReports";
 
 import ChamberForm from "../chamber/ChamberForm";
 import ChamberDetail from "../chamber/ChamberDetail";
@@ -41,43 +41,37 @@ import EmployeeUnactive from "../employees/EmployeeUnactive";
  */
 
 function AppRoutes({ login, signup, logout }) {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useCurrentUser();
   return (
     <div className="pt-5">
       <Routes>
         <Route path="/login" element={<LoginForm login={login} />} />
         <Route path="/signup" element={<SignupForm signup={signup} />} />
-        {!currentUser ? (
+        {!currentUser === "manager" ? (
           <Route to="/login" element={<LoginForm login={login} />} />
         ) : (
           <>
             <Route path="/profile" element={<ProfileForm />} />
-
             <Route path="/projects/active" element={<ProjectList />} />
             <Route path="/projects/new" element={<ProjectForm />} />
             <Route path="/projects/:projId" element={<ProjectDetail />} />
             <Route path="/projects/:projId/input" element={<ProjectInput />} />
-
             <Route
               path="projects/:projId/reports"
               element={<ProjectReports />}
             />
-
             <Route
               path="projects/:projId/reports/chamber"
               element={<ChamberReportList />}
             />
-
             <Route
               path="projects/:projId/reports/dehus"
               element={<DehuReportList />}
             />
-
             <Route
               path="projects/:projId/reports/materials"
               element={<MaterialReportList />}
             />
-
             <Route
               path="/projects/:projId/chamber/new"
               element={<ChamberForm />}
@@ -91,12 +85,8 @@ function AppRoutes({ login, signup, logout }) {
               element={<ChamberReading />}
             />
             <Route
-              path="/projects/:projId/chamber/:chamberId/reading"
-              element={<DehuForm />}
-            />
-            <Route
               path="/projects/:projId/chamber/:chamberId/dehu/new"
-              element={<DehuList />}
+              element={<DehuForm />}
             />
             <Route
               path="/projects/:projId/chamber/:chamberId/dehu/:dehuId/reading"
@@ -107,6 +97,10 @@ function AppRoutes({ login, signup, logout }) {
               element={<MaterialList />}
             />
             <Route
+              path="/projects/:projId/chamber/:chamberId/dehu/list"
+              element={<DehuList />}
+            />
+            <Route
               path="/projects/:projId/chamber/:chamberId/material/:materialId/reading"
               element={<MaterialReading />}
             />
@@ -114,7 +108,6 @@ function AppRoutes({ login, signup, logout }) {
               path="/projects/:projId/chamber/:chamberId/material/new"
               element={<MaterialForm />}
             />
-
             <Route path="/employee/personnel" element={<EmployeeList />} />
             <Route path="/employee/pending" element={<EmployeeUnactive />} />
             <Route path="/employee/:empId" element={<EmployeeDetail />} />

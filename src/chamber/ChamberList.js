@@ -33,19 +33,20 @@ function ChamberList({ projId }) {
 
   return (
     <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-      <div className="col-md-8 offset-md-2 text-center">
+      <div className="text-center">
         {chambers.length ? (
           <ChamberCardList chambers={chambers} />
         ) : (
-          <p className="">No chambers were found</p>
+          <strong className="">No chambers found</strong>
         )}
-        <NavLink
-          className="btn btn-primary btn-block mt-4"
-          to={`/projects/${projId}/chamber/new`}
-        >
-          New Chamber
-        </NavLink>
       </div>
+
+      <NavLink
+        className="btn btn-primary col-md-6 col-lg-4 offset-md-3 offset-lg-4"
+        to={`/projects/${projId}/chamber/new`}
+      >
+        New Chamber
+      </NavLink>
     </div>
   );
 }

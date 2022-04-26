@@ -30,12 +30,14 @@ function MaterialReportList() {
   if (!readings) return <LoadingSpinner />;
 
   return (
-    <div className="">
-      {readings.length ? (
-        <MaterialCardList readings={readings} />
-      ) : (
-        <p className="">No readings were found</p>
-      )}
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+      <div className="text-center">
+        {readings.length ? (
+          <MaterialCardList readings={readings} />
+        ) : (
+          <strong className="">No readings found</strong>
+        )}
+      </div>
     </div>
   );
 }

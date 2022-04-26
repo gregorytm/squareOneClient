@@ -2,6 +2,8 @@ import React from "react";
 
 //create currentUser object  and sets it throughout the app
 
-const UserContext = React.createContext();
+export const UserContext = React.createContext();
 
-export default UserContext;
+export function useCurrentUser() {
+  return React.useContext(UserContext).currentUser;
+}

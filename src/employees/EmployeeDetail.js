@@ -74,6 +74,10 @@ function EmployeeDetail() {
     }
   }
 
+  function handleBack() {
+    navigate(-1);
+  }
+
   if (!employee) return <LoadingSpinner />;
 
   return (
@@ -97,7 +101,7 @@ function EmployeeDetail() {
         Promote to Manager
       </button>{" "}
       <button
-        className="btn btn-secondary btn-block mt-4"
+        className="btn btn-dark btn-block mt-4"
         type="submit"
         onClick={handleUnactive}
       >
@@ -110,6 +114,13 @@ function EmployeeDetail() {
       >
         Delete Employee
       </button>{" "}
+      <button
+        className="btn btn-secondary btn-block mt-4"
+        type="submit"
+        onClick={handleBack}
+      >
+        Go Back
+      </button>
       {formErrors.length ? <Alert type="danger" messages={formErrors} /> : null}
     </div>
   );

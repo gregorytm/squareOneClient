@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams, useNavigate } from "react-router-dom";
 import SquareOneApi from "../api/api";
 import LoadingSpinner from "../common/LoadingSpinner";
 
@@ -13,6 +13,7 @@ import LoadingSpinner from "../common/LoadingSpinner";
 function ProjectReports() {
   const { projId } = useParams();
   const [project, setProject] = useState(null);
+  let navigate = useNavigate();
 
   useEffect(
     function getProjectForUser() {
@@ -24,17 +25,30 @@ function ProjectReports() {
     [projId]
   );
 
+  function handleBack() {
+    navigate(-1);
+  }
+
   if (!project) return <LoadingSpinner />;
 
   return (
     <div className="text-center">
-      <h1>{project.address}</h1>
-      <nav>
-        <Link to="chamber">Chamber Reports</Link> |{" "}
-        <Link to="dehus">Dehumidifier Reports</Link> |{" "}
-        <Link to="materials">Material Reports</Link>
-      </nav>
-      <div className="content">
+      <h4>
+        {project.address} - {project.insuredName}
+      </h4>
+      <NavLink className="btn btn-primary btn-block mt-4" to="chamber">
+        Chamber Reports
+      </NavLink>{" "}
+      <NavLink className="btn btn-warning btn-block mt-4" to="dehus">
+        Dehumidifier Reports
+      </NavLink>{" "}
+      <NavLink className="btn btn-success btn-block mt-4" to="materials">
+        Material Reports
+      </NavLink>
+      <button className="btn btn-secondary btn-block mt-4" onClick={handleBack}>
+        Back to Projects
+      </button>
+      <div className="">
         <Outlet />
       </div>
     </div>

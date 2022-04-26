@@ -16,11 +16,16 @@ function MaterialCard({
   dayNumber,
 }) {
   return (
-    <div>
-      <p>
-        {chamberName}, {materialName}, {moistureContent},{" "}
-        {new Date(readingDate).toDateString()}, {dayNumber}
-      </p>
+    <div className="container">
+      <h4 className="text-center">material readings</h4>
+      <div className="MaterialCard card">
+        <div className="text-center">
+          <p>
+            {chamberName}, {materialName}, {moistureContent},{" "}
+            {new Date(readingDate).toDateString()}, {dayNumber}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

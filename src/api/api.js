@@ -78,15 +78,15 @@ class SquareOneApi {
 
   /** Get list of chambers related to project*/
 
-  static async getChambers(projectId) {
-    let res = await this.request(`projects/${projectId}/chambers`);
+  static async getChambers(projId) {
+    let res = await this.request(`chamber/project/${projId}`);
     return res.chambers;
   }
 
   /**get details on a chamber by id  */
 
-  static async getChamber(id) {
-    let res = await this.request(`chamber/${id}`);
+  static async getChamber(chamberId) {
+    let res = await this.request(`chamber/${chamberId}`);
     return res.chamber[0];
   }
 
@@ -94,11 +94,11 @@ class SquareOneApi {
 
   static async newChamber(data) {
     let res = await this.request(
-      `projects/${data.project_id}/chamber/new`,
+      `chamber/${data.project_id}/new`,
       data,
       "post"
     );
-    return res;
+    return res.chamber;
   }
 
   /**Get chambers and readings for assoicated project */
@@ -118,6 +118,7 @@ class SquareOneApi {
   /** New chamber reading for api */
 
   static async newChamberReading(data) {
+    console.log("api test", data);
     let res = await this.request(`chamber/reading/new`, data, "post");
     return res;
   }
@@ -133,13 +134,20 @@ class SquareOneApi {
 
   static async getMaterials(chamberId) {
     let res = await this.request(`material/${chamberId}`);
-    return res.materials;
+    return res.material;
   }
 
   /** Create new affected material related to chamber */
 
   static async newMaterial(data) {
     let res = await this.request(`material/new`, data, "post");
+    return res;
+  }
+
+  /** Delete material from the db */
+
+  static async deleteMaterial(materialId) {
+    let res = await this.request(`material/${materialId}`, {}, "delete");
     return res;
   }
 
@@ -182,13 +190,24 @@ class SquareOneApi {
 
   static async newDehu(data) {
     let res = await this.request(`dehu/new`, data, "post");
-    return res;
+    console.log("dehuapi", res.dehu);
+    return res.dehu;
   }
 
   /** New dehu reading for db */
 
   static async newDehuReading(data) {
+    console.log("dehu Api");
+
     let res = await this.request(`dehu/reading/new`, data, "post");
+
+    return res;
+  }
+
+  /** Delete dehu from the db */
+
+  static async deleteDehu(dehuId) {
+    let res = await this.request(`dehu/${dehuId}`, {}, "delete");
     return res;
   }
 
@@ -257,8 +276,8 @@ class SquareOneApi {
 
   static async saveProfile(empId, data) {
     let res = await this.request(`employee/${empId}/update`, data, "patch");
-    console.log("test", res);
-    return res.user;
+    console.log("TEST TEST", res);
+    return { ...res.employee, id: empId };
   }
 }
 

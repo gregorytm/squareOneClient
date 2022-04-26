@@ -31,17 +31,20 @@ function EmployeeList() {
 
   return (
     <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-      {employees.length ? (
-        <EmployeeCardList employees={employees} />
-      ) : (
-        <p className="">No employees were found</p>
-      )}
-      <NavLink
-        className=" btn btn-primary col-md-6 col-lg-4 offset-md-3 offset-lg-4"
-        to={`/employee/personnel/new`}
-      >
-        New Employee
-      </NavLink>
+      <div className="col-md-8 offset-md-2 text-center">
+        {employees.length ? (
+          <EmployeeCardList employees={employees} />
+        ) : (
+          <p className="">No employees were found</p>
+        )}
+
+        <NavLink
+          className="btn btn-primary btn-block mt-4"
+          to={`/employee/personnel/new`}
+        >
+          New Employee
+        </NavLink>
+      </div>
     </div>
   );
 }

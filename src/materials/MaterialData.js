@@ -24,19 +24,20 @@ function MaterialData({ materialId }) {
 
   async function search(materialId) {
     let data = await SquareOneApi.materialReadingData(materialId);
-    data = data.materialData;
     setData(data);
   }
 
   if (!data) return <LoadingSpinner />;
 
   return (
-    <div className="">
-      {data ? (
-        <MaterialDataCard data={data} />
-      ) : (
-        <p className="">No previous entries found for this material</p>
-      )}
+    <div className="container-fulid">
+      <div className="text-center">
+        {data && !data === "Invalid Date" ? (
+          <MaterialDataCard data={data} />
+        ) : (
+          <strong>No previous readings found for selected material</strong>
+        )}
+      </div>
     </div>
   );
 }

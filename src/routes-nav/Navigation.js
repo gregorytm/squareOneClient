@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import UserContext from "../auth/UserContext";
+import { useCurrentUser } from "../auth/UserContext";
 import "./Navigation.css";
 
 /** Navigation bar for site. Shows up on every page.
@@ -12,10 +12,9 @@ import "./Navigation.css";
  */
 
 function Navigation({ logout }) {
-  const { currentUser } = useContext(UserContext);
-  console.log();
+  const currentUser = useCurrentUser();
 
-  function loggedInNav() {
+  function LoggedInAdmin() {
     return (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item mr-4">
@@ -42,7 +41,51 @@ function Navigation({ logout }) {
     );
   }
 
-  function loggedOutNav() {
+  function LoggedInManager() {
+    return (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item mr-4">
+          <NavLink className="nav-link" to="/projects/active">
+            Projects
+          </NavLink>
+        </li>
+        <li className="nav-item mr-4">
+          <NavLink className="nav-link" to="/profile">
+            Profile
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login" onClick={logout}>
+            Log out {currentUser.lastName || currentUser.username}
+          </Link>
+        </li>
+      </ul>
+    );
+  }
+
+  function LoggedInUser() {
+    return (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item mr-4">
+          <NavLink className="nav-link" to="/projects/active">
+            Projects
+          </NavLink>
+        </li>
+        <li className="nav-item mr-4">
+          <NavLink className="nav-link" to="/profile">
+            Profile
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login" onClick={logout}>
+            Log out {currentUser.lastName || currentUser.username}
+          </Link>
+        </li>
+      </ul>
+    );
+  }
+
+  function LoggedOutNav() {
     return (
       <ul className="navbar-nav ml-auto">
         <li className="nav-link mr-4">
@@ -50,7 +93,7 @@ function Navigation({ logout }) {
             Login
           </NavLink>
         </li>
-        <li className="nav-item mr-4">
+        <li className="nav-link mr-4">
           <NavLink className="nav-link" to="/signup">
             Signup
           </NavLink>
@@ -64,7 +107,15 @@ function Navigation({ logout }) {
       <Link className="navbar-brand" to="/">
         SquareOne
       </Link>
-      {currentUser ? loggedInNav() : loggedOutNav()}
+      {!currentUser ? (
+        <LoggedOutNav />
+      ) : currentUser.role === "admin" ? (
+        <LoggedInAdmin />
+      ) : currentUser.role === "manager" ? (
+        <LoggedInManager />
+      ) : (
+        <LoggedInUser />
+      )}
     </nav>
   );
 }

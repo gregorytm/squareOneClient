@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
+import { useCurrentUser } from "../auth/UserContext";
 import SquareOneApi from "../api/api";
 import Alert from "../common/Alert";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -15,10 +16,10 @@ import LoadingSpinner from "../common/LoadingSpinner";
 
 function ChamberDetail() {
   const { projId, chamberId } = useParams();
+  let navigate = useNavigate();
+  const currentUser = useCurrentUser();
 
   const [chamber, setChamber] = useState(null);
-
-  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   useEffect(
@@ -31,48 +32,43 @@ function ChamberDetail() {
     [chamberId]
   );
 
+  function handleBack() {
+    navigate(`/projects/${projId}/input`);
+  }
+
   async function handleDelete(evt) {
     evt.preventDefault();
     let result = await SquareOneApi.deleteChamber(chamberId);
     if (result.deleted) {
-      navigate(`/projects/${projId}`);
+      navigate(`/projects/${projId}/input`);
     } else {
       setFormErrors(result.errors);
     }
   }
 
-  if (!chamber) return <LoadingSpinner />;
-
-  return (
-    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-      <div className="card">
+  function LoggedInManagement() {
+    return (
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4 text-center">
         <h4>{chamber.chamberName}</h4>
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item mr-4">
-            <NavLink
-              className="nav-link"
-              to={`/projects/${projId}/chamber/${chamberId}/dehu/list`}
-            >
-              Dehumifier List
-            </NavLink>
-          </li>
-          <li className="nav-item mr-4">
-            <NavLink
-              className="nav-link"
-              to={`/projects/${projId}/chamber/${chamberId}/material/list`}
-            >
-              Affected Materials
-            </NavLink>
-          </li>
-          <li className="nav-item mr-4">
-            <NavLink
-              className="nav-link"
-              to={`/projects/${projId}/chamber/${chamberId}/reading`}
-            >
-              Chamber Reading
-            </NavLink>
-          </li>
-        </ul>
+        <NavLink
+          className="btn btn-primary btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/dehu/list`}
+        >
+          Dehumidifier List
+        </NavLink>
+        <NavLink
+          className="btn btn-success btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/material/list`}
+        >
+          Affected Materials
+        </NavLink>
+        <NavLink
+          className="btn btn-warning btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/reading`}
+        >
+          Chamber Reading
+        </NavLink>
+
         <button
           className="btn btn-danger btn-block mt-4"
           type="submit"
@@ -81,10 +77,61 @@ function ChamberDetail() {
           Delete Chamber
         </button>
 
+        <button
+          className="btn btn-secondary btn-block mt-4"
+          onClick={handleBack}
+        >
+          Back to chamber list
+        </button>
+
         {formErrors.length ? (
           <Alert type="danger" messages={formErrors} />
         ) : null}
       </div>
+    );
+  }
+
+  function LoggedInUser() {
+    return (
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4 text-center">
+        <h4>{chamber.chamberName}</h4>
+        <NavLink
+          className="btn btn-primary btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/dehu/list`}
+        >
+          Dehumidifier List
+        </NavLink>
+        <NavLink
+          className="btn btn-success btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/material/list`}
+        >
+          Affected Materials
+        </NavLink>
+        <NavLink
+          className="btn btn-warning btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/reading`}
+        >
+          Chamber Reading
+        </NavLink>
+        <button
+          className="btn btn-secondary btn-block mt-4"
+          onClick={handleBack}
+        >
+          Back to chamber list
+        </button>
+
+        {formErrors.length ? (
+          <Alert type="danger" messages={formErrors} />
+        ) : null}
+      </div>
+    );
+  }
+
+  if (!chamber) return <LoadingSpinner />;
+
+  return (
+    <div>
+      {currentUser.role === "admin" ? <LoggedInManagement /> : <LoggedInUser />}
     </div>
   );
 }

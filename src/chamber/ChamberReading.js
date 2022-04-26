@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ChamberData from "./ChamberData";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
@@ -24,7 +24,8 @@ import SquareOneApi from "../api/api";
  */
 
 function ChamberReading() {
-  const { chamberId } = useParams();
+  let navigate = useNavigate();
+  const { projId, chamberId } = useParams();
   const [formData, setFormData] = useState({
     chamberId: chamberId,
     dehuId: null,
@@ -37,6 +38,16 @@ function ChamberReading() {
   });
   const [formErrors, setFormErrors] = useState([]);
 
+  async function newChamberReadingApiCall(data) {
+    try {
+      let result = await SquareOneApi.newChamberReading(data);
+      return { success: true, result };
+    } catch (errors) {
+      console.error("failed to create new chamber reading", errors);
+      return { success: false, errors };
+    }
+  }
+
   /** handle form submit:
    *
    * calls login func prop and if successfull redirecs to /projects/:projId/chamber/:chamberId
@@ -46,7 +57,7 @@ function ChamberReading() {
     const {
       chamberId: chamber_id,
       dehuId: dehu_id,
-      material_id,
+      materialId: material_id,
       temp,
       RH,
       moistureContent: moisture_content,
@@ -54,22 +65,23 @@ function ChamberReading() {
       readingDate: reading_date,
     } = formData;
     const formSafe = {
-      chamber_id,
+      chamber_id: Number(chamber_id),
       dehu_id,
       material_id,
-      temp,
-      RH,
+      temp: Number(temp),
+      RH: Number(RH),
       moisture_content,
-      day_number,
+      day_number: Number(day_number),
       reading_date,
     };
 
     evt.preventDefault();
-    let result = await SquareOneApi.newChamberReading(formSafe);
-    if (result) {
-      window.location.reload();
+    let reading = await newChamberReadingApiCall(formSafe);
+    if (reading.success) {
+      navigate(`/projects/${projId}/chamber/${chamberId}`);
     } else {
-      setFormErrors(result.errors);
+      console.log("handle submit test", reading);
+      setFormErrors(reading.errors);
     }
   }
 
@@ -80,50 +92,55 @@ function ChamberReading() {
   }
 
   return (
-    <div className="ChamberForm">
-      <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <h2 className="mb-3">New Reading</h2>
-        <ChamberData chamberId={chamberId} />
-        <div className="card">
-          <div className="card-body">
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>temp</label>
-                <input
-                  name="temp"
-                  className="form-control"
-                  value={formData.temp}
-                  onChange={handleChange}
-                />
-                <label>RH</label>
-                <input
-                  name="RH"
-                  className="form-control"
-                  value={formData.RH}
-                  onChange={handleChange}
-                />
-                <label>day number</label>
-                <input
-                  name="dayNumber"
-                  className="form-control"
-                  value={formData.dayNumber}
-                  onChange={handleChange}
-                />
-              </div>
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+      <div className="card">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <ChamberData chamberId={chamberId} />
 
-              {formErrors.length ? (
-                <Alert type="danger" messages={formErrors} />
-              ) : null}
+            <div className="form-group">
+              <label>tempature</label>
+              <input
+                name="temp"
+                required="required"
+                className="form-control"
+                value={formData.temp}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>relative humidity</label>
+              <input
+                name="RH"
+                required="required"
+                className="form-control"
+                value={formData.RH}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>day number</label>
+              <input
+                name="dayNumber"
+                required="required"
+                className="form-control"
+                value={formData.dayNumber}
+                onChange={handleChange}
+              />
+            </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary float-right"
-                onSubmit={handleSubmit}
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+            {formErrors.length ? (
+              <Alert type="danger" messages={formErrors} />
+            ) : null}
+
+            <button
+              type="submit"
+              className="btn btn-primary float-right mt-4"
+              onSubmit={handleSubmit}
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </div>

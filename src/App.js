@@ -5,7 +5,7 @@ import Navigation from "./routes-nav/Navigation";
 import AppRoutes from "./routes-nav/AppRoutes";
 import LoadingSpinner from "./common/LoadingSpinner";
 import SquareOneApi from "./api/api";
-import UserContext from "./auth/UserContext";
+import { UserContext } from "./auth/UserContext";
 
 //Key name for storing toekn in localStorage for re-login
 export const TOKEN_STORAGE_ID = "squareOne-token";

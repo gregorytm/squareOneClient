@@ -51,11 +51,11 @@ function MaterialReading() {
     const formSafe = {
       chamber_id,
       dehu_id,
-      material_id,
+      material_id: Number(material_id),
       temp,
       RH,
-      moisture_content,
-      day_number,
+      moisture_content: Number(moisture_content),
+      day_number: Number(day_number),
       reading_date,
     };
 
@@ -72,25 +72,41 @@ function MaterialReading() {
     const { name, value } = evt.target;
     setFormData((data) => ({ ...data, [name]: value }));
   }
+
+  async function handleDelete(evt) {
+    evt.preventDefault();
+    let result = await SquareOneApi.deleteMaterial(materialId);
+    if (result.deleted) {
+      navigate(`/projects/${projId}/input`);
+    } else {
+      setFormErrors(result.errors);
+    }
+  }
+
   return (
-    <div className="ChamberForm">
-      <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <h2 className="mb-3">New Reading</h2>
-        <MaterialData materialId={materialId} />
-        <div className="card">
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+      <h2 className="mb-3">New Reading</h2>
+      <div className="card">
+        <div className="card-body">
+          <MaterialData materialId={materialId} />
+
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Moisture Content</label>
                 <input
                   name="moistureContent"
+                  required="required"
                   className="form-control"
                   value={formData.moistureContent}
                   onChange={handleChange}
                 />
-                <label>day number</label>
+              </div>
+              <div className="form-group">
+                <label>Day Number</label>
                 <input
                   name="dayNumber"
+                  required="required"
                   className="form-control"
                   value={formData.dayNumber}
                   onChange={handleChange}
@@ -103,7 +119,7 @@ function MaterialReading() {
 
               <button
                 type="submit"
-                className="btn btn-primary float-right"
+                className="btn btn-primary btn-block mt-4"
                 onSubmit={handleSubmit}
               >
                 Submit
@@ -112,6 +128,13 @@ function MaterialReading() {
           </div>
         </div>
       </div>
+      <button
+        className="btn btn-danger btn-block mt-4"
+        type="submit"
+        onClick={handleDelete}
+      >
+        Delete Chamber
+      </button>
     </div>
   );
 }

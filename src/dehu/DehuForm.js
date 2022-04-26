@@ -14,7 +14,7 @@ import SquareOneApi from "../api/api";
  * Routed as /projects/:id/chamber/:chamberId/dehu/new
  */
 
-function DehuForm({ dehu }) {
+function DehuForm() {
   const { projId, chamberId } = useParams();
   const [formData, setFormData] = useState({
     dehuNumber: "",
@@ -24,6 +24,17 @@ function DehuForm({ dehu }) {
 
   let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
+
+  async function newDehuApiCall(data) {
+    try {
+      let result = await SquareOneApi.newDehu(data);
+      console.log("dehu", { success: true, result });
+      return { success: true, result };
+    } catch (errors) {
+      console.error("create new dehu failed", errors);
+      return { success: false, errors };
+    }
+  }
 
   /** handles form submit:
    *
@@ -36,16 +47,22 @@ function DehuForm({ dehu }) {
       chamberId: chamber_id,
       location,
     } = formData;
-    const formSafe = { dehu_number, chamber_id, location };
+    console.log("dehu data", formData);
+    const formSafe = {
+      dehu_number: Number(dehu_number),
+      chamber_id: Number(chamber_id),
+      location,
+    };
 
     evt.preventDefault();
-    let result = await SquareOneApi.newDehu(formSafe);
-    if (result) {
+    let dehu = await newDehuApiCall(formSafe);
+    console.log("TEST TEST", dehu);
+    if (dehu.success) {
       navigate(
-        `/projects/${projId}/chamber/${chamberId}/dehu/${result.id}/reading`
+        `/projects/${projId}/chamber/${chamberId}/dehu/${dehu.result.id}/reading`
       );
     } else {
-      setFormErrors(result.errors);
+      setFormErrors(dehu.errors);
     }
   }
 
@@ -65,6 +82,7 @@ function DehuForm({ dehu }) {
                 <label>Dehumidifier number</label>
                 <input
                   name="dehuNumber"
+                  required="required"
                   className="form-control"
                   value={formData.dehuNumber}
                   onChange={handleChange}
@@ -74,6 +92,7 @@ function DehuForm({ dehu }) {
                 <label>location</label>
                 <input
                   name="location"
+                  required="required"
                   className="form-control"
                   value={formData.location}
                   onChange={handleChange}
@@ -86,7 +105,7 @@ function DehuForm({ dehu }) {
 
               <button
                 type="submit"
-                className="btn btn-primary float-right"
+                className="btn btn-primary float-right mt-4"
                 onSubmit={handleSubmit}
               >
                 Submit

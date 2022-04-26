@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import SquareOneApi from "../api/api";
-import DehuReadingDataCard from "./DehuReadingDataCard";
+import DehuDataCard from "./DehuDataCard";
 import LoadingSpinner from "../common/LoadingSpinner";
+import "./DehuData.css";
 
 /**Finds the last reading taken for a given dehu
  *
  * on mount, loads dehu reading data from API
  *
- * DehuReadingData -> DehuReadingDataCard
+ * DehuReadingData -> DehuDataCard
  */
 
-function DehuReadingData({ dehuId }) {
+function DehuData({ dehuId }) {
   const [data, setData] = useState(null);
 
   useEffect(
@@ -22,21 +23,24 @@ function DehuReadingData({ dehuId }) {
 
   async function search(dehuId) {
     let data = await SquareOneApi.dehuReadingData(dehuId);
-    data = data.dehuData;
     setData(data);
   }
 
   if (!data) return <LoadingSpinner />;
 
   return (
-    <div className="">
-      {data ? (
-        <DehuReadingDataCard data={data} />
-      ) : (
-        <p className=""> No previous readings found for this dehumidifier</p>
-      )}
+    <div className="container-fluid">
+      <div className="text-center">
+        {data && !data === "Invalid Date" ? (
+          <DehuDataCard data={data} />
+        ) : (
+          <strong className="text-center">
+            No previous readings found for dehumidifier
+          </strong>
+        )}
+      </div>
     </div>
   );
 }
 
-export default DehuReadingData;
+export default DehuData;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
+import { useCurrentUser } from "./UserContext";
 
 /** Login form.
  *
@@ -14,11 +15,13 @@ import Alert from "../common/Alert";
  */
 
 function LoginForm({ login }) {
+  let navigate = useNavigate();
+  let user = useCurrentUser();
+  console.log("user", user);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   /** Handle form submit:
@@ -79,7 +82,7 @@ function LoginForm({ login }) {
               ) : null}
 
               <button
-                className="btn btn-primary float-right"
+                className="btn btn-primary float-right mt-4"
                 onSubmit={handleSubmit}
               >
                 Submit

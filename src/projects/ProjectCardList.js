@@ -15,7 +15,7 @@ function ProjectCardList({ projects }) {
         <ProjectCard
           key={project.id}
           id={project.id}
-          ensuredName={project.ensuredName}
+          insuredName={project.insured_name}
           address={project.address}
           createdAt={project.createdAt}
           active={project.active}
