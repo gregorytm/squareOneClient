@@ -61,7 +61,7 @@ function ProjectDetail() {
           className="btn btn-primary btn-block mt-4"
           to={`/projects/${projId}/input`}
         >
-          Create Projects and take readings
+          Create chambers and take readings
         </NavLink>
         <button
           className="btn btn-secondary btn-block mt-4"
@@ -86,7 +86,7 @@ function ProjectDetail() {
           className="btn btn-primary btn-block mt-4"
           to={`/projects/${projId}/input`}
         >
-          Create Projects and take readings
+          Create chambers and take readings
         </NavLink>
         <NavLink
           className="btn btn-success btn-block mt-4"
