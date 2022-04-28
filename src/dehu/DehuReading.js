@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useCurrentUser } from "../auth/UserContext";
 import DehuData from "./DehuData";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
@@ -17,6 +18,9 @@ import SquareOneApi from "../api/api";
 
 function DehuReading() {
   const { projId, chamberId, dehuId } = useParams();
+  const currentUser = useCurrentUser();
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     chamberId: null,
     dehuId: dehuId,
@@ -27,7 +31,6 @@ function DehuReading() {
     dayNumber: "",
     readingDate: new Date().toJSON(),
   });
-  let navigate = useNavigate();
   const [formErrors, setFormErrors] = useState([]);
 
   async function newDehuReadingApiCall(data) {
@@ -94,68 +97,136 @@ function DehuReading() {
     }
   }
 
-  return (
-    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-      <h2 className="mb-3">New Reading</h2>
-      <div className="card">
-        <div className="card-body">
-          <DehuData dehuId={dehuId} />
-
+  function LoggedInManagement() {
+    return (
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <h2 className="mb-3">New Reading</h2>
+        <div className="card">
           <div className="card-body">
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>tempature</label>
-                <input
-                  name="tempature"
-                  request="required"
-                  className="form-control"
-                  value={formData.tempature}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Relative Humidity</label>
-                <input
-                  name="RH"
-                  required="required"
-                  className="form-control"
-                  value={formData.RH}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Day Number</label>
-                <input
-                  name="dayNumber"
-                  required="required"
-                  className="form-control"
-                  value={formData.dayNumber}
-                  onChange={handleChange}
-                />
-              </div>
+            <DehuData dehuId={dehuId} />
 
-              {formErrors.length ? (
-                <Alert type="danger" messages={formErrors} />
-              ) : null}
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label>tempature</label>
+                  <input
+                    name="tempature"
+                    request="required"
+                    className="form-control"
+                    value={formData.tempature}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Relative Humidity</label>
+                  <input
+                    name="RH"
+                    required="required"
+                    className="form-control"
+                    value={formData.RH}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Day Number</label>
+                  <input
+                    name="dayNumber"
+                    required="required"
+                    className="form-control"
+                    value={formData.dayNumber}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary btn-block mt-4"
-                onSubmit={handleSubmit}
-              >
-                Submit
-              </button>
-            </form>
+                {formErrors.length ? (
+                  <Alert type="danger" messages={formErrors} />
+                ) : null}
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block mt-4"
+                  onSubmit={handleSubmit}
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <button
+          className="btn btn-danger btn-block mt-4"
+          type="submit"
+          onClick={handleDelete}
+        >
+          Delete this chamber
+        </button>
+      </div>
+    );
+  }
+
+  function LoggedInUser() {
+    return (
+      <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <h2 className="mb-3">New Reading</h2>
+        <div className="card">
+          <div className="card-body">
+            <DehuData dehuId={dehuId} />
+
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label>tempature</label>
+                  <input
+                    name="tempature"
+                    request="required"
+                    className="form-control"
+                    value={formData.tempature}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Relative Humidity</label>
+                  <input
+                    name="RH"
+                    required="required"
+                    className="form-control"
+                    value={formData.RH}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Day Number</label>
+                  <input
+                    name="dayNumber"
+                    required="required"
+                    className="form-control"
+                    value={formData.dayNumber}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                {formErrors.length ? (
+                  <Alert type="danger" messages={formErrors} />
+                ) : null}
+
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block mt-4"
+                  onSubmit={handleSubmit}
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-      <button
-        className="btn btn-danger btn-block mt-4"
-        type="submit"
-        onClick={handleDelete}
-      >
-        Delete Chamber
-      </button>
+    );
+  }
+
+  return (
+    <div>
+      {currentUser.role === "admin" ? <LoggedInManagement /> : <LoggedInUser />}
     </div>
   );
 }
