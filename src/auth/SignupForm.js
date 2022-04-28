@@ -76,7 +76,7 @@ function SignupForm({ signup }) {
                 <input
                   name="username"
                   minLength="3"
-                  maxLength="6"
+                  maxLength="20"
                   className="form-control"
                   value={formData.username}
                   onChange={handleChange}
