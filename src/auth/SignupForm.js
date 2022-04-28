@@ -75,6 +75,7 @@ function SignupForm({ signup }) {
                 <label>Username</label>
                 <input
                   name="username"
+                  required="required"
                   minLength="3"
                   maxLength="20"
                   className="form-control"
@@ -87,6 +88,7 @@ function SignupForm({ signup }) {
                 <label>Password</label>
                 <input
                   type="password"
+                  required="required"
                   name="password"
                   minLength="5"
                   className="form-control"
@@ -99,6 +101,7 @@ function SignupForm({ signup }) {
                 <label>First inital</label>
                 <input
                   name="firstInital"
+                  required="required"
                   minLength="1"
                   maxLength="1"
                   className="form-control"
@@ -110,6 +113,7 @@ function SignupForm({ signup }) {
                 <label>Last name</label>
                 <input
                   name="lastName"
+                  required="required"
                   minLength="1"
                   className="form-control"
                   value={formData.lastName}
