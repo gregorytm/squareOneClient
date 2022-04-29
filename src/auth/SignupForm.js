@@ -49,7 +49,7 @@ function SignupForm({ signup }) {
 
       evt.preventDefault();
       let result = await signup(formSafe);
-      if (result.success || !currentUser) {
+      if (result.success && !currentUser) {
         navigate("/employee/pending");
       } else if (currentUser.role === "admin") {
         navigate("/employee/personnel");
