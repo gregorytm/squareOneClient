@@ -158,7 +158,7 @@ function DehuReading() {
           type="submit"
           onClick={handleDelete}
         >
-          Delete this chamber
+          Delete this dehumidifier
         </button>
       </div>
     );
