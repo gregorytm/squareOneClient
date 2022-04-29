@@ -11,7 +11,7 @@ import DehuCard from "./DehuCard";
 function DehuCardList({ readings }) {
   return (
     <div>
-      <h4 className="text-center">Dehumidifier Readings</h4>
+      <h4 className="text-center">Dehumidifier Reports</h4>
       {readings.map((reading) => (
         <DehuCard
           key={readings.indexOf(reading)}
