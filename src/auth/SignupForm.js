@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "./UserContext";
 import Alert from "../common/Alert";
 
 /**Singup form
@@ -15,6 +16,8 @@ import Alert from "../common/Alert";
 
 function SignupForm({ signup }) {
   let navigate = useNavigate();
+  const currentUser = useCurrentUser();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -46,8 +49,10 @@ function SignupForm({ signup }) {
 
       evt.preventDefault();
       let result = await signup(formSafe);
-      if (result.success) {
+      if (result.success || !currentUser) {
         navigate("/employee/pending");
+      } else if (currentUser.role === "admin") {
+        navigate("/employee/personnel");
       } else {
         setFormErrors(result.errors);
       }
