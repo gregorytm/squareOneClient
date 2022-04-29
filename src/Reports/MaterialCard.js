@@ -17,10 +17,9 @@ function MaterialCard({
 }) {
   return (
     <div className="container">
-      <h4 className="text-center">material readings</h4>
       <div className="MaterialCard card">
         <div className="text-center">
-          <p>
+          <p className="card-title">
             {chamberName}, {materialName}, {moistureContent},{" "}
             {new Date(readingDate).toDateString()}, {dayNumber}
           </p>

@@ -11,6 +11,7 @@ import MaterialCard from "./MaterialCard";
 function MaterialCardList({ readings }) {
   return (
     <div>
+      <h4 className="text-center">Affected Material Reports</h4>
       {readings.map((reading) => (
         <MaterialCard
           key={readings.indexOf(reading)}
