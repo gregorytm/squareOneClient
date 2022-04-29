@@ -10,7 +10,7 @@ import ChamberCard from "./ChamberCard";
 function ChamberCardList({ readings }) {
   return (
     <div className="">
-      <h4 className="text-center">Chamber Readings</h4>
+      <h4 className="text-center">Chamber Reports</h4>
       {readings.map((reading) => (
         <ChamberCard
           key={readings.indexOf(reading)}
