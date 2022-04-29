@@ -226,7 +226,13 @@ function DehuReading() {
 
   return (
     <div>
-      {currentUser.role === "admin" ? <LoggedInManagement /> : <LoggedInUser />}
+      {currentUser.role === "admin" ? (
+        <LoggedInManagement />
+      ) : currentUser.role === "manager" ? (
+        <LoggedInManagement />
+      ) : (
+        <LoggedInUser />
+      )}
     </div>
   );
 }
