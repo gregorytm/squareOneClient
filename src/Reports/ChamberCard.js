@@ -14,8 +14,6 @@ import "./ChamberCard.css";
 function ChamberCard({ chamberName, temp, rh, readingDate, dayNumber }) {
   return (
     <div className="container">
-      <h4 className="text-center">chamber readings</h4>
-
       <div className="ChamberCard card">
         <div className="text-center">
           <p className="card-title">
