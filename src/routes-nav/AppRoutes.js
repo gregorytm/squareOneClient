@@ -4,6 +4,7 @@ import { useCurrentUser } from "../auth/UserContext";
 
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
+import AdminSignup from "../auth/AdminSignup";
 import LogoutForm from "../auth/LogoutForm";
 
 import ProjectList from "../projects/ProjectList";
@@ -111,10 +112,7 @@ function AppRoutes({ login, signup, logout }) {
             <Route path="/employee/personnel" element={<EmployeeList />} />
             <Route path="/employee/pending" element={<EmployeeUnactive />} />
             <Route path="/employee/:empId" element={<EmployeeDetail />} />
-            <Route
-              path="/employee/personnel/new"
-              element={<SignupForm signup={signup} />}
-            />
+            <Route path="/employee/personnel/new" element={<AdminSignup />} />
           </>
         )}
       </Routes>

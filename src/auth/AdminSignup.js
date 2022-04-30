@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "./UserContext";
+import SquareOneApi from "../api/api";
 import Alert from "../common/Alert";
 
 /**Singup form
@@ -13,8 +15,9 @@ import Alert from "../common/Alert";
  * Routed as /signup
  */
 
-function SignupForm({ signup }) {
+function AdminSignup() {
   let navigate = useNavigate();
+  const currentUser = useCurrentUser();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -23,6 +26,16 @@ function SignupForm({ signup }) {
     lastName: "",
   });
   const [formErrors, setFormErrors] = useState([]);
+
+  async function newEmployeeApiCall(data) {
+    try {
+      let result = await SquareOneApi.signup(data);
+      return { success: true, result };
+    } catch (errors) {
+      console.error("create new employee failed", errors);
+      return { success: false, errors };
+    }
+  }
 
   /** Handle form submit:
    *
@@ -46,11 +59,11 @@ function SignupForm({ signup }) {
       const formSafe = { username, password, first_inital, last_name };
 
       evt.preventDefault();
-      let result = await signup(formSafe);
-      if (result.success) {
-        navigate("/employee/pending");
+      let employee = await newEmployeeApiCall(formSafe);
+      if (employee.success) {
+        navigate("/employee/personnel");
       } else {
-        setFormErrors(result.errors);
+        setFormErrors(employee.errors);
       }
     }
   }
@@ -147,4 +160,4 @@ function SignupForm({ signup }) {
   );
 }
 
-export default SignupForm;
+export default AdminSignup;

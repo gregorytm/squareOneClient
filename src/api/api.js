@@ -276,7 +276,6 @@ class SquareOneApi {
 
   static async saveProfile(empId, data) {
     let res = await this.request(`employee/${empId}/update`, data, "patch");
-    console.log("TEST TEST", res);
     return { ...res.employee, id: empId };
   }
 }
