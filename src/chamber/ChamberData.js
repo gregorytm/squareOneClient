@@ -32,7 +32,7 @@ function ChamberData({ chamberId }) {
   return (
     <div className="container-fluid">
       <div className="text-center">
-        {data && !data === "Invalid Date" ? (
+        {data ? (
           <ChamberDataCard data={data} />
         ) : (
           <strong className="">No previous entries found for chamber</strong>

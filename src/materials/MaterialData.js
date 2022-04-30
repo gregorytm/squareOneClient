@@ -32,7 +32,7 @@ function MaterialData({ materialId }) {
   return (
     <div className="container-fulid">
       <div className="text-center">
-        {data && !data === "Invalid Date" ? (
+        {data ? (
           <MaterialDataCard data={data} />
         ) : (
           <strong>No previous readings found for selected material</strong>

@@ -7,7 +7,7 @@ import React from "react";
  */
 
 function MaterialDataCard(data) {
-  const { reading_date: readingDate, day_number: dayNumber } = data.data;
+  const { readingDate, dayNumber } = data.data;
   return (
     <div className="">
       <p>

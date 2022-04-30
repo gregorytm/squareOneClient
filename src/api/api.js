@@ -127,7 +127,7 @@ class SquareOneApi {
 
   static async chamberReadingData(chamberId) {
     let res = await this.request(`chamber/${chamberId}/reading/data`);
-    return res;
+    return res.chamberData;
   }
 
   /**Get list of affected materials related to cham */
@@ -169,7 +169,7 @@ class SquareOneApi {
 
   static async materialReadingData(chamberId) {
     let res = await this.request(`material/${chamberId}/reading/data`);
-    return res;
+    return res.materialData;
   }
 
   /** get list of dehus related to a chamber */
