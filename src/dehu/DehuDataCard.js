@@ -8,7 +8,8 @@ import React from "react";
  */
 
 function DehuDataCard(data) {
-  const { reading_date: readingDate, day_number: dayNumber } = data.data;
+  const { readingDate, dayNumber } = data.data;
+  console.log("Dehucard teset", data.data);
   return (
     <div className="">
       the last reading was taken on {new Date(readingDate).toDateString()}, day

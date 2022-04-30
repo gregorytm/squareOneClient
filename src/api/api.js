@@ -215,7 +215,7 @@ class SquareOneApi {
 
   static async dehuReadingData(dehuId) {
     let res = await this.request(`dehu/${dehuId}/reading/data`);
-    return res;
+    return res.dehuData;
   }
 
   /**Get employees for admin */
