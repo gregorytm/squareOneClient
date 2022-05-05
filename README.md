@@ -1,5 +1,10 @@
+## A client side React app.  One admin, managers and employees for a water damage, home resteration site.
+
+*Allows the creation and data colleciton of a home project that has chambers, dehumidifiers, and affected materials to track tempatures in a water damaged home*
 
 ## Available Scripts
+
+**install all npm packages first**
 
 In the project directory, you can run:
 
