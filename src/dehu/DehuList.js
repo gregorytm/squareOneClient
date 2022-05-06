@@ -35,16 +35,6 @@ function DehuList() {
     setChamber(chamber);
   }
 
-  // async function handleDelete(evt) {
-  //   evt.preventDefault();
-  //   let result = await SquareOneApi.deleteMaterial(materialId);
-  //   if (result.deleted) {
-  //     navigate(`/projects/${projId}/input`);
-  //   } else {
-  //     setFormErrors(result.errors);
-  //   }
-  // }
-
   if (!dehus && !chamber) return <LoadingSpinner />;
 
   return (
