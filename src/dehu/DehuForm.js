@@ -28,7 +28,6 @@ function DehuForm() {
   async function newDehuApiCall(data) {
     try {
       let result = await SquareOneApi.newDehu(data);
-      console.log("dehu", { success: true, result });
       return { success: true, result };
     } catch (errors) {
       console.error("create new dehu failed", errors);
@@ -47,7 +46,6 @@ function DehuForm() {
       chamberId: chamber_id,
       location,
     } = formData;
-    console.log("dehu data", formData);
     const formSafe = {
       dehu_number: Number(dehu_number),
       chamber_id: Number(chamber_id),
@@ -56,7 +54,6 @@ function DehuForm() {
 
     evt.preventDefault();
     let dehu = await newDehuApiCall(formSafe);
-    console.log("TEST TEST", dehu);
     if (dehu.success) {
       navigate(
         `/projects/${projId}/chamber/${chamberId}/dehu/${dehu.result.id}/reading`

@@ -48,7 +48,6 @@ function ProjectForm() {
 
     evt.preventDefault();
     let project = await newProjectApiCall(formSafe);
-    console.log("project", project);
     if (project) {
       navigate(`/projects/${project.result.id}`);
     } else {

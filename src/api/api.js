@@ -118,7 +118,6 @@ class SquareOneApi {
   /** New chamber reading for api */
 
   static async newChamberReading(data) {
-    console.log("api test", data);
     let res = await this.request(`chamber/reading/new`, data, "post");
     return res;
   }
@@ -190,17 +189,13 @@ class SquareOneApi {
 
   static async newDehu(data) {
     let res = await this.request(`dehu/new`, data, "post");
-    console.log("dehuapi", res.dehu);
     return res.dehu;
   }
 
   /** New dehu reading for db */
 
   static async newDehuReading(data) {
-    console.log("dehu Api");
-
     let res = await this.request(`dehu/reading/new`, data, "post");
-
     return res;
   }
 

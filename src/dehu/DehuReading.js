@@ -35,7 +35,6 @@ function DehuReading() {
 
   async function newDehuReadingApiCall(data) {
     try {
-      console.log("test!");
       let result = await SquareOneApi.newDehuReading(data);
       return { success: true, result };
     } catch (errors) {
@@ -72,7 +71,6 @@ function DehuReading() {
     };
 
     evt.preventDefault();
-    console.log("test");
     let reading = await newDehuReadingApiCall(formSafe);
     if (reading.success) {
       navigate(`/projects/${projId}/chamber/${chamberId}`);

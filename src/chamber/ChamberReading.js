@@ -80,7 +80,6 @@ function ChamberReading() {
     if (reading.success) {
       navigate(`/projects/${projId}/chamber/${chamberId}`);
     } else {
-      console.log("handle submit test", reading);
       setFormErrors(reading.errors);
     }
   }

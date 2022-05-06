@@ -45,7 +45,6 @@ function MaterialForm() {
     evt.preventDefault();
     let material = await newMaterialApiCall(formSafe);
     if (material.success) {
-      console.log("material", material);
       navigate(
         `/projects/${projId}/chamber/${chamberId}/material/${material.result.id}/reading`
       );

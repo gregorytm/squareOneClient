@@ -17,7 +17,6 @@ import { useCurrentUser } from "./UserContext";
 function LoginForm({ login }) {
   let navigate = useNavigate();
   let user = useCurrentUser();
-  console.log("user", user);
   const [formData, setFormData] = useState({
     username: "",
     password: "",

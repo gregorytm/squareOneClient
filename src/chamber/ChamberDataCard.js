@@ -7,7 +7,6 @@ import React from "react";
  */
 
 function ChamberDataCard(data) {
-  console.log("chambertest", data);
   const { readingDate, dayNumber } = data.data;
   return (
     <div className="">
