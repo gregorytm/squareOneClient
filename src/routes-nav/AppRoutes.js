@@ -5,7 +5,6 @@ import { useCurrentUser } from "../auth/UserContext";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
 import AdminSignup from "../auth/AdminSignup";
-import LogoutForm from "../auth/LogoutForm";
 
 import ProjectList from "../projects/ProjectList";
 import ProfileForm from "../profiles/ProfileForm";
