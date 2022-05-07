@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCurrentUser } from "../auth/UserContext";
 import MaterialData from "./MaterialData";
 import Alert from "../common/Alert";

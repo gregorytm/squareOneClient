@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 import { useCurrentUser } from "../auth/UserContext";
@@ -13,8 +12,8 @@ import { useCurrentUser } from "../auth/UserContext";
  * Confirmation of a successful save is a simple alert
  */
 
+//TODO: rework profile form or rework currentUser
 function ProfileForm() {
-  let navigate = useNavigate();
   const theCurrentUser = useCurrentUser();
   const { currentUser, setCurrentUser } = useCurrentUser;
   const [formData, setFormData] = useState({

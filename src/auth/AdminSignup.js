@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCurrentUser } from "./UserContext";
 import SquareOneApi from "../api/api";
 import Alert from "../common/Alert";
 
@@ -17,7 +16,6 @@ import Alert from "../common/Alert";
 
 function AdminSignup() {
   let navigate = useNavigate();
-  const currentUser = useCurrentUser();
 
   const [formData, setFormData] = useState({
     username: "",

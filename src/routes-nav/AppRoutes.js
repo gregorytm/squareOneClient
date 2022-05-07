@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { Routes, Route, Navigate, Link, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useCurrentUser } from "../auth/UserContext";
 
 import LoginForm from "../auth/LoginForm";

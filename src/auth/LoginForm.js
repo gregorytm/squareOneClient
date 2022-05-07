@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
-import { useCurrentUser } from "./UserContext";
 
 /** Login form.
  *
@@ -16,7 +15,6 @@ import { useCurrentUser } from "./UserContext";
 
 function LoginForm({ login }) {
   let navigate = useNavigate();
-  let user = useCurrentUser();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
