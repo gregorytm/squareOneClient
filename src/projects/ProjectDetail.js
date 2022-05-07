@@ -38,7 +38,7 @@ function ProjectDetail() {
   );
 
   function handleBack() {
-    navigate(-1);
+    navigate("/projects/active");
   }
 
   async function handleDelete(evt) {
