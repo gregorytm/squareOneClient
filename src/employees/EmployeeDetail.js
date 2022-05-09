@@ -75,7 +75,7 @@ function EmployeeDetail() {
   }
 
   function handleBack() {
-    navigate(-1);
+    navigate(`/employee/personnel`);
   }
 
   if (!employee) return <LoadingSpinner />;
