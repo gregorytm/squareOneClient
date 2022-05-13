@@ -41,6 +41,10 @@ function ProjectDetail() {
     navigate("/projects/active");
   }
 
+  function handleUpdate() {
+    navigate(`projects/${projId}/update`);
+  }
+
   async function handleDelete(evt) {
     evt.preventDefault();
     let result = await SquareOneApi.deleteProject(projId);
@@ -93,6 +97,12 @@ function ProjectDetail() {
           to={`/projects/${projId}/reports`}
         >
           Generate project reports
+        </NavLink>
+        <NavLink
+          className="btn btn-warning btn-block mt-4"
+          to={`/projects/${projId}/update`}
+        >
+          Edit Project
         </NavLink>
         <button
           className="btn btn-danger btn-block mt-4"

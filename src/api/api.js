@@ -69,6 +69,13 @@ class SquareOneApi {
     return res;
   }
 
+  /** Update project for api */
+
+  static async updateProject(data) {
+    let res = await this.request(`projects/${data.id}/update`, data, "post");
+    return res;
+  }
+
   /** Delete project from the db */
 
   static async deleteProject(id) {

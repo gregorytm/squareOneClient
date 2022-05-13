@@ -10,6 +10,7 @@ import ProfileForm from "../profiles/ProfileForm";
 import ProjectDetail from "../projects/ProjectDetail";
 import ProjectForm from "../projects/ProjectForm";
 import ProjectInput from "../projects/ProjectInput";
+import ProjectUpdate from "../projects/ProjectUpdate";
 import ProjectReports from "../reports/ProjectReports";
 
 import ChamberForm from "../chamber/ChamberForm";
@@ -55,6 +56,10 @@ function AppRoutes({ login, signup, logout }) {
             <Route path="/projects/new" element={<ProjectForm />} />
             <Route path="/projects/:projId" element={<ProjectDetail />} />
             <Route path="/projects/:projId/input" element={<ProjectInput />} />
+            <Route
+              path="/projects/:projId/update"
+              element={<ProjectUpdate />}
+            />
             <Route
               path="projects/:projId/reports"
               element={<ProjectReports />}
