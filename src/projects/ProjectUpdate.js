@@ -60,13 +60,10 @@ function ProjectUpdate() {
     }
   }
 
+  /** update formData field */
   function handleChange(evt) {
-    const { name, value } = evt.targert;
-    setFormData((f) => ({
-      ...f,
-      [name]: value,
-    }));
-    setFormErrors([]);
+    const { name, value } = evt.target;
+    setFormData((data) => ({ ...data, [name]: value }));
   }
 
   return (
