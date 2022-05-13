@@ -16,7 +16,6 @@ function ProjectUpdate() {
   let navigate = useNavigate();
   const { projId } = useParams();
 
-  // const [project, setProject] = useState(null);
   const [formData, setFormData] = useState({
     insuredName: "",
     address: "",
@@ -52,6 +51,7 @@ function ProjectUpdate() {
     const formSafe = { insured_name, address };
 
     evt.preventdefault();
+    console.log("formSafe", formSafe);
     let project = await updateProjectApiCall(formSafe);
     if (project.success) {
       navigate(`/projects/active`);
@@ -90,7 +90,7 @@ function ProjectUpdate() {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Confirm password to make changes:</label>
               <input
                 type="password"
@@ -99,7 +99,7 @@ function ProjectUpdate() {
                 value={formData.password}
                 onChange={handleChange}
               />
-            </div>
+            </div> */}
 
             {formErrors.length ? (
               <Alert type="danger" messages={formErrors} />
