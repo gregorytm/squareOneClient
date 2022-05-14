@@ -1,4 +1,4 @@
-## A client side React app.  One admin, managers and employees for a water damage, home resteration site.
+## A client side React app.  One admin with managers and employees for tempature damage, home resteration site.
 
 *Allows the creation and data colleciton of a home project that has chambers, dehumidifiers, and affected materials to track tempatures in a water damaged home*
 
