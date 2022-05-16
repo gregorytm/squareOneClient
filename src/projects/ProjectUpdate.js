@@ -77,6 +77,7 @@ function ProjectUpdate() {
               <label>Insured Name</label>
               <input
                 name="insuredName"
+                required="required"
                 className="form-control"
                 value={formData.insuredName}
                 onChange={handleChange}
@@ -86,6 +87,7 @@ function ProjectUpdate() {
               <label>address</label>
               <input
                 name="address"
+                required="required"
                 className="form-control"
                 value={formData.address}
                 onChange={handleChange}
