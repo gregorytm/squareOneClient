@@ -17,6 +17,7 @@ import ChamberForm from "../chamber/ChamberForm";
 import ChamberDetail from "../chamber/ChamberDetail";
 import ChamberReading from "../chamber/ChamberReading";
 import ChamberReportList from "../reports/ChamberReportList";
+import ChamberUpdate from "../chamber/ChamberUpdate";
 
 import DehuForm from "../dehu/DehuForm";
 import DehuReading from "../dehu/DehuReading";
@@ -83,6 +84,10 @@ function AppRoutes({ login, signup, logout }) {
             <Route
               path="/projects/:projId/chamber/:chamberId"
               element={<ChamberDetail />}
+            />
+            <Route
+              path="/projects/:projId/chamber/:chamberId/update"
+              element={<ChamberUpdate />}
             />
             <Route
               path="/projects/:projId/chamber/:chamberId/reading"

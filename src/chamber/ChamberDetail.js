@@ -56,17 +56,26 @@ function ChamberDetail() {
         >
           Dehumidifier List
         </NavLink>
+
         <NavLink
           className="btn btn-success btn-block mt-4"
           to={`/projects/${projId}/chamber/${chamberId}/material/list`}
         >
           Affected Materials
         </NavLink>
+
         <NavLink
-          className="btn btn-warning btn-block mt-4"
+          className="btn btn-info btn-block mt-4"
           to={`/projects/${projId}/chamber/${chamberId}/reading`}
         >
           Chamber Reading
+        </NavLink>
+
+        <NavLink
+          className="btn btn-warning btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/update`}
+        >
+          Edit Chamber
         </NavLink>
 
         <button

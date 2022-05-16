@@ -108,6 +108,13 @@ class SquareOneApi {
     return res.chamber;
   }
 
+  /** Update project for api */
+
+  static async updateChamber(data) {
+    let res = await this.request(`chamber/${data.id}`, data, "patch");
+    return res;
+  }
+
   /**Get chambers and readings for assoicated project */
 
   static async chamberReports(projectId) {
