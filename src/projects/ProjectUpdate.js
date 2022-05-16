@@ -37,20 +37,21 @@ function ProjectUpdate() {
   );
 
   async function updateProjectApiCall(data) {
+    console.log("api call", data);
     try {
       let result = await SquareOneApi.updateProject(data);
       return { success: true, result };
     } catch (errors) {
-      console.errors("update project failed", errors);
+      console.error("update project failed", errors);
       return { success: false, errors };
     }
   }
 
   async function handleSubmit(evt) {
     const { insuredName: insured_name, address } = formData;
-    const formSafe = { insured_name, address };
+    const formSafe = { id: projId, insured_name, address };
 
-    evt.preventdefault();
+    evt.preventDefault();
     console.log("formSafe", formSafe);
     let project = await updateProjectApiCall(formSafe);
     if (project.success) {
