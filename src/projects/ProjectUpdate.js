@@ -49,11 +49,10 @@ function ProjectUpdate() {
 
   async function handleSubmit(evt) {
     const { insuredName: insured_name, address } = formData;
-    const formSafe = { id: projId, insured_name, address };
+    const newProject = { id: projId, insured_name, address };
 
     evt.preventDefault();
-    console.log("formSafe", formSafe);
-    let project = await updateProjectApiCall(formSafe);
+    let project = await updateProjectApiCall(newProject);
     if (project.success) {
       navigate(`/projects/active`);
     } else {
