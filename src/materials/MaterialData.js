@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SquareOneApi from "../api/api";
 import MaterialDataCard from "./MaterialDataCard";
-import LoadingSpinner from "../common/LoadingSpinner";
 
 /** Finds the last readings taken for a given material
  *
@@ -26,8 +25,6 @@ function MaterialData({ materialId }) {
     let data = await SquareOneApi.materialReadingData(materialId);
     setData(data);
   }
-
-  if (!data) return <LoadingSpinner />;
 
   return (
     <div className="container-fulid">

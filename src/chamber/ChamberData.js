@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SquareOneApi from "../api/api";
 import ChamberDataCard from "./ChamberDataCard";
-import LoadingSpinner from "../common/LoadingSpinner";
 
 /**Finds the last reading take for given chamber
  *
@@ -27,15 +26,13 @@ function ChamberData({ chamberId }) {
     setData(data);
   }
 
-  if (!data) return <LoadingSpinner />;
-
   return (
     <div className="container-fluid">
       <div className="text-center">
         {data ? (
           <ChamberDataCard data={data} />
         ) : (
-          <strong className="">No previous entries found for chamber</strong>
+          <strong className="">No previous readings found for chamber</strong>
         )}
       </div>
     </div>
