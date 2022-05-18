@@ -155,7 +155,7 @@ function DehuReading() {
           className="btn btn-warning btn-block mt-4"
           to={`/projects/${projId}/chamber/${chamberId}/dehu/${dehuId}/update`}
         >
-          Edit Dehumidifier
+          Edit dehumidifier
         </NavLink>
         <button
           className="btn btn-danger btn-block mt-4"
