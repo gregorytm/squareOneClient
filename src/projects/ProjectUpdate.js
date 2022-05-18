@@ -37,7 +37,6 @@ function ProjectUpdate() {
   );
 
   async function updateProjectApiCall(data) {
-    console.log("api call", data);
     try {
       let result = await SquareOneApi.updateProject(data);
       return { success: true, result };
