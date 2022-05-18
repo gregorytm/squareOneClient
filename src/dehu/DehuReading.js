@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { useCurrentUser } from "../auth/UserContext";
 import DehuData from "./DehuData";
 import Alert from "../common/Alert";
@@ -151,6 +151,12 @@ function DehuReading() {
             </div>
           </div>
         </div>
+        <NavLink
+          className="btn btn-warning btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/dehu/${dehuId}/update`}
+        >
+          Edit Dehumidifier
+        </NavLink>
         <button
           className="btn btn-danger btn-block mt-4"
           type="submit"

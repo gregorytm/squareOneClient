@@ -188,8 +188,15 @@ class SquareOneApi {
   /** get list of dehus related to a chamber */
 
   static async getDehus(chamberId) {
-    let res = await this.request(`dehu/${chamberId}`);
+    let res = await this.request(`dehu/chamber/${chamberId}`);
     return res.dehus;
+  }
+
+  /**get details on a chamber by id  */
+
+  static async getDehu(dehuId) {
+    let res = await this.request(`dehu/${dehuId}`);
+    return res.dehu;
   }
 
   /**Get dehus and readings for assoicated project */
@@ -204,6 +211,13 @@ class SquareOneApi {
   static async newDehu(data) {
     let res = await this.request(`dehu/new`, data, "post");
     return res.dehu;
+  }
+
+  /** Update dehu for api */
+
+  static async updateDehu(data) {
+    let res = await this.request(`dehu/${data.id}`, data, "patch");
+    return res;
   }
 
   /** New dehu reading for db */
