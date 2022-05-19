@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { useCurrentUser } from "../auth/UserContext";
 import MaterialData from "./MaterialData";
 import Alert from "../common/Alert";
@@ -132,6 +132,12 @@ function MaterialReading() {
             </div>
           </div>
         </div>
+        <NavLink
+          className="btn btn-warning btn-block mt-4"
+          to={`/projects/${projId}/chamber/${chamberId}/material/${materialId}/update`}
+        >
+          Edit affected material
+        </NavLink>
         <button
           className="btn btn-danger btn-block mt-4"
           type="submit"

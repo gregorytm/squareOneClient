@@ -108,7 +108,7 @@ class SquareOneApi {
     return res.chamber;
   }
 
-  /** Update project for api */
+  /** Update chamber for api */
 
   static async updateChamber(data) {
     let res = await this.request(`chamber/${data.id}`, data, "patch");
@@ -143,10 +143,17 @@ class SquareOneApi {
     return res.chamberData;
   }
 
+  /**get details on a material by materialId  */
+
+  static async getMaterial(materialId) {
+    let res = await this.request(`material/${materialId}`);
+    return res.material;
+  }
+
   /**Get list of affected materials related to cham */
 
   static async getMaterials(chamberId) {
-    let res = await this.request(`material/${chamberId}`);
+    let res = await this.request(`material/${chamberId}/list`);
     return res.material;
   }
 
@@ -154,6 +161,15 @@ class SquareOneApi {
 
   static async newMaterial(data) {
     let res = await this.request(`material/new`, data, "post");
+    return res;
+  }
+
+  /** Update affected material for api */
+
+  static async updateMaterial(data) {
+    console.log("update test", data);
+    let res = await this.request(`material/${data.id}`, data, "patch");
+    console.log("res", res);
     return res;
   }
 
