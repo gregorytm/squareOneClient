@@ -41,10 +41,6 @@ function ProjectDetail() {
     navigate("/projects/active");
   }
 
-  function handleUpdate() {
-    navigate(`projects/${projId}/update`);
-  }
-
   async function handleDelete(evt) {
     evt.preventDefault();
     let result = await SquareOneApi.deleteProject(projId);
