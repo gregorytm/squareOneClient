@@ -167,9 +167,7 @@ class SquareOneApi {
   /** Update affected material for api */
 
   static async updateMaterial(data) {
-    console.log("update test", data);
     let res = await this.request(`material/${data.id}`, data, "patch");
-    console.log("res", res);
     return res;
   }
 
