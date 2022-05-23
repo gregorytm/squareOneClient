@@ -29,7 +29,7 @@ function MaterialUpdate() {
       }
       getMaterial();
     },
-    [chamberId]
+    [materialId]
   );
 
   async function updateMaterialApiCall(data) {
