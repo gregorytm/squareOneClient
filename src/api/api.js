@@ -181,6 +181,7 @@ class SquareOneApi {
   /** New material reading for DB reading for db */
 
   static async newMaterialReading(data) {
+    console.log("test", data);
     let res = await this.request(`material/reading/new`, data, "post");
     return res;
   }
