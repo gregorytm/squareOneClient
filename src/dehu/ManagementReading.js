@@ -4,7 +4,7 @@ import DehuData from "./DehuData";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
 
-function DehuReadingButtons() {
+function ManagementReading() {
   const { projId, chamberId, dehuId } = useParams();
   let navigate = useNavigate();
 
@@ -144,4 +144,4 @@ function DehuReadingButtons() {
   );
 }
 
-export default DehuReadingButtons;
+export default ManagementReading;

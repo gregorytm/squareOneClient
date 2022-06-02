@@ -16,7 +16,7 @@ import SquareOneApi from "../api/api";
  * Routed as /projects/:id/chamber/:chamberId/dehu/reading
  */
 
-function LoggedInUser() {
+function UserReading() {
   const { projId, chamberId, dehuId } = useParams();
   const currentUser = useCurrentUser();
   let navigate = useNavigate();
@@ -144,4 +144,4 @@ function LoggedInUser() {
   );
 }
 
-export default LoggedInUser;
+export default UserReading;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useCurrentUser } from "../auth/UserContext";
-import LoggedInManagement from "./LoggedInManagement";
-import LoggedInUser from "./LoggedInUser";
+import ManagementReading from "./ManagementReading";
+import UserReading from "./UserReading";
 
 /** Dehu reading form buttons
  *
@@ -21,11 +21,11 @@ function DehuReading() {
   return (
     <div>
       {currentUser.role === "admin" ? (
-        <LoggedInManagement />
+        <ManagementReading />
       ) : currentUser.role === "manager" ? (
-        <LoggedInManagement />
+        <ManagementReading />
       ) : (
-        <LoggedInUser />
+        <UserReading />
       )}
     </div>
   );
