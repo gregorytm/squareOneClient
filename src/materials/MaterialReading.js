@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate, useParams, NavLink } from "react-router-dom";
+import React from "react";
 import { useCurrentUser } from "../auth/UserContext";
-import MaterialData from "./MaterialData";
 import ManagementReading from "./ManagementReading";
 import UserReading from "./UserReading";
-import Alert from "../common/Alert";
-import SquareOneApi from "../api/api";
 
 /** Dehu reading form
  *
