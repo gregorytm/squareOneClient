@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
-import { useCurrentUser } from "../auth/UserContext";
 import MaterialData from "./MaterialData";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
@@ -19,7 +18,6 @@ import SquareOneApi from "../api/api";
 
 function ManagementReading() {
   const { projId, chamberId, materialId } = useParams();
-  const currentUser = useCurrentUser();
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({

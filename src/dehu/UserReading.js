@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams, NavLink } from "react-router-dom";
-import { useCurrentUser } from "../auth/UserContext";
+import { useNavigate, useParams } from "react-router-dom";
 import DehuData from "./DehuData";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
@@ -18,7 +17,6 @@ import SquareOneApi from "../api/api";
 
 function UserReading() {
   const { projId, chamberId, dehuId } = useParams();
-  const currentUser = useCurrentUser();
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
