@@ -16,11 +16,10 @@ import LoadingSpinner from "../common/LoadingSpinner";
  */
 
 function ChamberDetail() {
-  const { projId, chamberId } = useParams();
+  const { chamberId } = useParams();
   const currentUser = useCurrentUser();
 
   const [chamber, setChamber] = useState(null);
-  const [formErrors, setFormErrors] = useState([]);
 
   useEffect(
     function getChamberForUser() {
