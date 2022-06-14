@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "publish": "rm -rf build && npm run build && rsync -avhz --delete build/ gregorytm.dev:/var/www/html/square-one-client/"
+    "deploy": "rm -rf build && npm run build && rsync -avhz --delete build/ gregorytm.dev:/var/www/html/square-one-client/"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
