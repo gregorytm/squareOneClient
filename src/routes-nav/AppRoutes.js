@@ -23,6 +23,7 @@ import DehuForm from "../dehu/DehuForm";
 import DehuReading from "../dehu/DehuReading";
 import DehuList from "../dehu/DehuList";
 import DehuReportList from "../reports/DehuReportList";
+import DehuReadingDetail from "../reports/DehuReadingDetail";
 import DehuUpdate from "../dehu/DehuUpdate";
 
 import MaterialReading from "../materials/MaterialReading";
@@ -42,6 +43,7 @@ import EmployeeUnactive from "../employees/EmployeeUnactive";
  *
  * visiting non-existant route redirects to the homepage
  */
+//TODO: organize this
 
 function AppRoutes({ login, signup, logout }) {
   const currentUser = useCurrentUser();
@@ -106,6 +108,10 @@ function AppRoutes({ login, signup, logout }) {
             <Route
               path="/projects/:projId/chamber/:chamberId/dehu/:dehuId/reading"
               element={<DehuReading />}
+            />
+            <Route
+              path="/projects/:projId/reports/dehus/:reportId"
+              element={<DehuReadingDetail />}
             />
             <Route
               path="/projects/:projId/chamber/:chamberId/material/:materialId/update"

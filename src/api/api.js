@@ -181,7 +181,6 @@ class SquareOneApi {
   /** New material reading for DB reading for db */
 
   static async newMaterialReading(data) {
-    console.log("test", data);
     let res = await this.request(`material/reading/new`, data, "post");
     return res;
   }
@@ -240,6 +239,19 @@ class SquareOneApi {
   static async newDehuReading(data) {
     let res = await this.request(`dehu/reading/new`, data, "post");
     return res;
+  }
+
+  /**Get one dehu reading using the readings id */
+
+  static async dehuReading(reportId) {
+    let res = await this.request(`dehu/reading/${reportId}`);
+    return res;
+  }
+
+  /** Delete dehu reading from the readings db */
+
+  static async dehuReadingDelete(reportId) {
+    let res = await this.request(`dehu/reading/${reportId}`, {}, "delete");
   }
 
   /** Delete dehu from the db */

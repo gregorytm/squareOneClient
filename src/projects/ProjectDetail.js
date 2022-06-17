@@ -122,6 +122,7 @@ function ProjectDetail() {
 
   if (!project) return <LoadingSpinner />;
 
+  //TODO: update this
   return (
     <div>
       {currentUser.role === "admin" ? <LoggedInManagement /> : <LoggedInUser />}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./DehuCard.css";
 
@@ -10,9 +11,18 @@ import "./DehuCard.css";
  * DehuList -> DehuCardList ->DehuCard
  */
 
-function DehuCard({ dehuNumber, location, temp, rh, readingDate, dayNumber }) {
+function DehuCard({
+  id,
+  dehuNumber,
+  projId,
+  location,
+  temp,
+  rh,
+  readingDate,
+  dayNumber,
+}) {
   return (
-    <div className="container">
+    <Link className="card" to={`projects/${projId}/reports/${id}`}>
       <div className="DehuCard card">
         <div className="text-center">
           <p className="card-title">
@@ -21,7 +31,7 @@ function DehuCard({ dehuNumber, location, temp, rh, readingDate, dayNumber }) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

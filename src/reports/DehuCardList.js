@@ -8,7 +8,7 @@ import DehuCard from "./DehuCard";
  * DehuList -> DehuCardList -> DehuCard
  */
 
-function DehuCardList({ readings }) {
+function DehuCardList({ readings }, projId) {
   return (
     <div>
       <h4 className="text-center">Dehumidifier Reports</h4>
@@ -17,6 +17,7 @@ function DehuCardList({ readings }) {
           key={readings.indexOf(reading)}
           id={readings.indexOf(reading)}
           dehuNumber={reading.dehuNumber}
+          projId={projId}
           location={reading.location}
           temp={reading.temp}
           rh={reading.rh}
