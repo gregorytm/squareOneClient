@@ -23,7 +23,7 @@ function DehuReadingDetail() {
   useEffect(
     function getReportForUser() {
       async function getReport() {
-        setReport(await SquareOneApi.getReportDetails(reportId));
+        setReport(await SquareOneApi.dehuReportDetails(reportId));
       }
       getReport();
     },
