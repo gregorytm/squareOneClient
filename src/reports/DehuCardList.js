@@ -8,14 +8,14 @@ import DehuCard from "./DehuCard";
  * DehuList -> DehuCardList -> DehuCard
  */
 
-function DehuCardList({ readings }, projId) {
+function DehuCardList({ readings, projId }) {
   return (
     <div>
       <h4 className="text-center">Dehumidifier Reports</h4>
       {readings.map((reading) => (
         <DehuCard
           key={readings.indexOf(reading)}
-          id={readings.indexOf(reading)}
+          id={reading.id}
           dehuNumber={reading.dehuNumber}
           projId={projId}
           location={reading.location}

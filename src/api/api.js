@@ -243,15 +243,16 @@ class SquareOneApi {
 
   /**Get one dehu reading using the readings id */
 
-  static async dehuReading(reportId) {
+  static async getReportDetails(reportId) {
     let res = await this.request(`dehu/reading/${reportId}`);
-    return res;
+    return res.dehuReportDetails[0];
   }
 
   /** Delete dehu reading from the readings db */
 
   static async dehuReadingDelete(reportId) {
     let res = await this.request(`dehu/reading/${reportId}`, {}, "delete");
+    return res;
   }
 
   /** Delete dehu from the db */

@@ -21,9 +21,9 @@ import ChamberUpdate from "../chamber/ChamberUpdate";
 
 import DehuForm from "../dehu/DehuForm";
 import DehuReading from "../dehu/DehuReading";
+import DehuReadingDetail from "../reports/DehuReadingDetail";
 import DehuList from "../dehu/DehuList";
 import DehuReportList from "../reports/DehuReportList";
-import DehuReadingDetail from "../reports/DehuReadingDetail";
 import DehuUpdate from "../dehu/DehuUpdate";
 
 import MaterialReading from "../materials/MaterialReading";

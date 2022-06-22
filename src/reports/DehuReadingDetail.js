@@ -23,7 +23,7 @@ function DehuReadingDetail() {
   useEffect(
     function getReportForUser() {
       async function getReport() {
-        setReport(await SquareOneApi.dehuReading(reportId));
+        setReport(await SquareOneApi.getReportDetails(reportId));
       }
       getReport();
     },
@@ -38,7 +38,7 @@ function DehuReadingDetail() {
     evt.preventDefault();
     let result = await SquareOneApi.dehuReadingDelete(reportId);
     if (result.deleted) {
-      navigate(-1);
+      navigate(`/projects/${projId}/reports/dehus`);
     } else {
       setFormErrors(result.errors);
     }
@@ -48,10 +48,14 @@ function DehuReadingDetail() {
 
   return (
     <div className="text-center">
-      <h3 className="">
-        {report.dehuId}, {report.temp}, {report.rh}, {report.readingDate},{" "}
-        {reading.dayNumber}
-      </h3>
+      <p className="">
+        <strong>dehumidifier id:</strong> {report.dehuId},{" "}
+        <strong>tempature recorderd:</strong> {report.temp},{" "}
+        <strong>relative humidity recorded:</strong> {report.rh},{" "}
+        <strong>reading date:</strong>{" "}
+        {new Date(report.readingDate).toDateString()},{" "}
+        <strong>days on project:</strong> {report.dayNumber}
+      </p>
 
       <button
         className="btn btn-danger btn-block mt-4"

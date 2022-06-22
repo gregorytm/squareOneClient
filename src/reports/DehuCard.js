@@ -22,14 +22,12 @@ function DehuCard({
   dayNumber,
 }) {
   return (
-    <Link className="card" to={`projects/${projId}/reports/${id}`}>
-      <div className="DehuCard card">
-        <div className="text-center">
-          <p className="card-title">
-            dehu number {dehuNumber}, {location}, {temp}, {rh},{" "}
-            {new Date(readingDate).toDateString()}, {dayNumber}
-          </p>
-        </div>
+    <Link className="card" to={`/projects/${projId}/reports/dehus/${id}`}>
+      <div className="text-center">
+        <p className="card-title">
+          dehu number {dehuNumber}, {location}, {temp}, {rh},{" "}
+          {new Date(readingDate).toDateString()}, {dayNumber}
+        </p>
       </div>
     </Link>
   );
