@@ -7,14 +7,15 @@ import ChamberCard from "./ChamberCard";
  * ChamberReport -> ChamberReportCardList -> ChamberReportCard
  */
 
-function ChamberCardList({ readings }) {
+function ChamberCardList({ readings, projId }) {
   return (
     <div className="">
       <h4 className="text-center">Chamber Reports</h4>
       {readings.map((reading) => (
         <ChamberCard
           key={readings.indexOf(reading)}
-          id={readings.indexOf(reading)}
+          id={reading.id}
+          projId={projId}
           chamberName={reading.chamberName}
           temp={reading.temp}
           rh={reading.rh}

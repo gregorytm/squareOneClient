@@ -13,7 +13,6 @@ import ChamberCardList from "./ChamberCardList";
 
 function ChamberReportList() {
   const { projId } = useParams();
-
   const [readings, setReadings] = useState(null);
 
   useEffect(
@@ -34,7 +33,7 @@ function ChamberReportList() {
     <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
       <div className="text-center">
         {readings.length ? (
-          <ChamberCardList readings={readings} />
+          <ChamberCardList readings={readings} projId={projId} />
         ) : (
           <strong className="">No readings found</strong>
         )}

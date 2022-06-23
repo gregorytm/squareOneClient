@@ -129,6 +129,13 @@ class SquareOneApi {
     return res;
   }
 
+  /** delete chamber reading from the readings db */
+
+  static async chamberReadingDelete(readingId) {
+    let res = await this.request(`chamber/reading/${readingId}`, {}, "delete");
+    return res;
+  }
+
   /** New chamber reading for api */
 
   static async newChamberReading(data) {
@@ -141,6 +148,13 @@ class SquareOneApi {
   static async chamberReadingData(chamberId) {
     let res = await this.request(`chamber/${chamberId}/reading/data`);
     return res.chamberData;
+  }
+
+  /**Get one chamber reading using the readings id */
+
+  static async chamberReadingDetails(readingId) {
+    let res = await this.request(`chamber/reading/${readingId}`);
+    return res.chamberReadingDetails[0];
   }
 
   /**get details on a material by materialId  */
@@ -243,7 +257,7 @@ class SquareOneApi {
 
   /**Get one dehu reading using the readings id */
 
-  static async getReportDetails(reportId) {
+  static async dehuReportDetails(reportId) {
     let res = await this.request(`dehu/reading/${reportId}`);
     return res.dehuReportDetails[0];
   }

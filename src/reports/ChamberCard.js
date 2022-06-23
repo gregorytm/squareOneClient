@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./ChamberCard.css";
 
@@ -11,18 +12,24 @@ import "./ChamberCard.css";
  *
  */
 
-function ChamberCard({ chamberName, temp, rh, readingDate, dayNumber }) {
+function ChamberCard({
+  id,
+  chamberName,
+  projId,
+  temp,
+  rh,
+  readingDate,
+  dayNumber,
+}) {
   return (
-    <div className="container">
-      <div className="ChamberCard card">
-        <div className="text-center">
-          <p className="card-title">
-            {chamberName}, {temp}, {rh}, {new Date(readingDate).toDateString()},{" "}
-            {dayNumber}
-          </p>
-        </div>
+    <Link className="card" to={`/projects/${projId}/reading/chamber/${id}`}>
+      <div className="text-center">
+        <p className="card-title">
+          {chamberName}, {temp}, {rh}, {new Date(readingDate).toDateString()},{" "}
+          {dayNumber}
+        </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
