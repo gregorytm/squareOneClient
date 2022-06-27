@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /**Show limiteed information about affected materials and readings related to project
  *
@@ -9,6 +10,8 @@ import React from "react";
  */
 
 function MaterialCard({
+  id,
+  projId,
   chamberName,
   materialName,
   moistureContent,
@@ -16,8 +19,8 @@ function MaterialCard({
   dayNumber,
 }) {
   return (
-    <div className="container">
-      <div className="MaterialCard card">
+    <Link className="card" to={`/projects/${projId}/reading/material/${id}`}>
+      <div className=" card">
         <div className="text-center">
           <p className="card-title">
             {chamberName}, {materialName}, {moistureContent},{" "}
@@ -25,7 +28,7 @@ function MaterialCard({
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -206,11 +206,18 @@ class SquareOneApi {
     return res.materials;
   }
 
-  /** Get last material reading info from DB */
+  /**Get one material reading using the readings id */
 
-  static async materialReadingData(chamberId) {
-    let res = await this.request(`material/${chamberId}/reading/data`);
-    return res.materialData;
+  static async materialReadingDetails(readingId) {
+    let res = await this.request(`material/reading/${readingId}`);
+    return res.materialReadingDetails[0];
+  }
+
+  /** delete material reading from the readings db */
+
+  static async materialReadingDelete(readingId) {
+    let res = await this.request(`material/reading/${readingId}`, {}, "delete");
+    return res;
   }
 
   /** get list of dehus related to a chamber */

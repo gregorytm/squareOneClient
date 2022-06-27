@@ -8,14 +8,15 @@ import MaterialCard from "./MaterialCard";
  * MaterialkList -> MaterialCardList -> MaterialCard
  */
 
-function MaterialCardList({ readings }) {
+function MaterialCardList({ readings, projId }) {
   return (
     <div>
       <h4 className="text-center">Affected Material Reports</h4>
       {readings.map((reading) => (
         <MaterialCard
           key={readings.indexOf(reading)}
-          id={readings.indexOf(reading)}
+          id={reading.id}
+          projId={projId}
           chamberName={reading.chamberName}
           materialName={reading.materialName}
           moistureContent={reading.moistureContent}

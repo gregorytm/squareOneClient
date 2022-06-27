@@ -28,6 +28,7 @@ import DehuReportList from "../reports/DehuReportList";
 import DehuUpdate from "../dehu/DehuUpdate";
 
 import MaterialReading from "../materials/MaterialReading";
+import MaterialReadingDetail from "../reports/MaterialReadingDetail";
 import MaterialForm from "../materials/MaterialForm";
 import MaterialList from "../materials/MaterialList";
 import MaterialReportList from "../reports/MaterialReportList";
@@ -81,6 +82,10 @@ function AppRoutes({ login, signup, logout }) {
             <Route
               path="projects/:projId/reports/materials"
               element={<MaterialReportList />}
+            />
+            <Route
+              path="/projects/:projId/reading/material/:readingId"
+              element={<MaterialReadingDetail />}
             />
             <Route
               path="/projects/:projId/chamber/new"

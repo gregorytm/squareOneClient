@@ -33,7 +33,7 @@ function MaterialReportList() {
     <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
       <div className="text-center">
         {readings.length ? (
-          <MaterialCardList readings={readings} />
+          <MaterialCardList readings={readings} projId={projId} />
         ) : (
           <strong className="">No readings found</strong>
         )}
