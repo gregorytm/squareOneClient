@@ -206,6 +206,13 @@ class SquareOneApi {
     return res.materials;
   }
 
+  /** Get last chamber reading info from DB */
+
+  static async materialReadingData(materialId) {
+    let res = await this.request(`material/${materialId}/reading/data`);
+    return res.materialData;
+  }
+
   /**Get one material reading using the readings id */
 
   static async materialReadingDetails(readingId) {
