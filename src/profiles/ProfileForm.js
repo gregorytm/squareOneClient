@@ -26,15 +26,15 @@ function ProfileForm() {
 
   const [saveConfirmed, setSaveConfiremed] = useState(false);
 
-  async function updateProfileApiCall(data) {
-    try {
-      let result = await SquareOneApi.saveProfile(data);
-      return { success: true, result };
-    } catch (errors) {
-      console.error("Failed to update profile", errors);
-      return { success: false, errors };
-    }
-  }
+  // async function updateProfileApiCall(data) {
+  //   try {
+  //     let result = await SquareOneApi.saveProfile(data);
+  //     return { success: true, result };
+  //   } catch (errors) {
+  //     console.error("Failed to update profile", errors);
+  //     return { success: false, errors };
+  //   }
+  // }
 
   /** on form submit:
    * -attempt save to backend & report any errors

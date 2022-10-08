@@ -26,7 +26,7 @@ function MaterialReadingDetail() {
       }
       getReport();
     },
-    [projId]
+    [projId, readingId]
   );
 
   function handleBack() {

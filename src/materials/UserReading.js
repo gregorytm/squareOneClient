@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCurrentUser } from "../auth/UserContext";
+// import { useCurrentUser } from "../auth/UserContext";
 import MaterialData from "./MaterialData";
 import Alert from "../common/Alert";
 import SquareOneApi from "../api/api";
@@ -75,15 +75,15 @@ function UserReading() {
     setFormData((data) => ({ ...data, [name]: value }));
   }
 
-  async function handleDelete(evt) {
-    evt.preventDefault();
-    let result = await SquareOneApi.deleteMaterial(materialId);
-    if (result.deleted) {
-      navigate(`/projects/${projId}/input`);
-    } else {
-      setFormErrors(result.errors);
-    }
-  }
+  // async function handleDelete(evt) {
+  //   evt.preventDefault();
+  //   let result = await SquareOneApi.deleteMaterial(materialId);
+  //   if (result.deleted) {
+  //     navigate(`/projects/${projId}/input`);
+  //   } else {
+  //     setFormErrors(result.errors);
+  //   }
+  // }
 
   return (
     <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">

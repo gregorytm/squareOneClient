@@ -26,7 +26,7 @@ function ChamberReadingDetail() {
       }
       getReport();
     },
-    [projId]
+    [projId, readingId]
   );
 
   function handleBack() {

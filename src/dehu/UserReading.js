@@ -73,15 +73,15 @@ function UserReading() {
     setFormData((data) => ({ ...data, [name]: value }));
   }
 
-  async function handleDelete(evt) {
-    evt.preventDefault();
-    let result = await SquareOneApi.deleteDehu(dehuId);
-    if (result.deleted) {
-      navigate(`/projects/${projId}/input`);
-    } else {
-      setFormErrors(result.errors);
-    }
-  }
+  // async function handleDelete(evt) {
+  //   evt.preventDefault();
+  //   let result = await SquareOneApi.deleteDehu(dehuId);
+  //   if (result.deleted) {
+  //     navigate(`/projects/${projId}/input`);
+  //   } else {
+  //     setFormErrors(result.errors);
+  //   }
+  // }
 
   return (
     <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">

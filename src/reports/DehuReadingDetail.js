@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, NavLink, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import SquareOneApi from "../api/api";
-import Alert from "../common/Alert";
+// import Alert from "../common/Alert";
 import LoadingSpinner from "../common/LoadingSpinner";
 
 /** Dehu reading detail Page
@@ -27,7 +27,7 @@ function DehuReadingDetail() {
       }
       getReport();
     },
-    [projId]
+    [projId, reportId]
   );
 
   function handleBack() {
