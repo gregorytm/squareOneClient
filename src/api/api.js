@@ -19,7 +19,6 @@ class SquareOneApi {
     const headers = SquareOneApi.token
       ? { Authorization: `Bearer ${SquareOneApi.token}` }
       : {};
-    console.log("test", headers);
     const params = method === "get" ? data : {};
     try {
       return (await axios({ url, method, data, params, headers })).data;
