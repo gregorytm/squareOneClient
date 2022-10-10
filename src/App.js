@@ -26,7 +26,6 @@ export const TOKEN_STORAGE_ID = "squareOne-token";
  */
 
 function App() {
-  console.log("test");
   const [infoLoaded, setInfoLoaded] = useState(false);
   // const [projectIds, setProjectIds ] = useState(new Set([]));
   const [currentUser, setCurrentUser] = useState(null);
