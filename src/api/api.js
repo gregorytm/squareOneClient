@@ -20,10 +20,10 @@ class SquareOneApi {
       ? { Authorization: `Bearer ${SquareOneApi.token}` }
       : {};
     const params = method === "get" ? data : {};
-    console.log(headers);
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
+      console.log(await axios({ url, method, data, params, headers }).data);
       console.error("API ERROR:", err.response);
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
