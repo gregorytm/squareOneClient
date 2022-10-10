@@ -17,7 +17,8 @@ class SquareOneApi {
 
   static async request(endpoint, data = {}, method = "get") {
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = SquareOneApi.token
+    const headers = SquareOneApi.token;
+    console.log(headers)
       ? { Authorization: `Bearer ${SquareOneApi.token}` }
       : {};
     const params = method === "get" ? data : {};
